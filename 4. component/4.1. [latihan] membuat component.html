@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>React Fundamental</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      /* 
+        ubahlah greeting menjadi function yang akan me-return nested element.
+        function tersebut akan menerima object props yang memiliki property sebagai berikut :
+        1. title            : digunakan sebagai children dari h1
+        2. inputPlaceholder : digunakan sebagai placeholder dari input
+        3. buttonLabel      : digunakan sebagai children dari button
+     */
+      const greeting = (
+        <div>
+          <h1>Welcome</h1>
+          <input type="text" placeholder="enter your name" />
+          <button>Say hi</button>
+        </div>
+      );
+
+      const root = document.getElementById("root");
+
+      /* 
+        karena greeting adalah sebuah function, maka function tersebut perlu dipanggil 
+        untuk mendapatkan element yang ingin di-render
+      */
+      ReactDOM.render(greeting, root);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>React Fundamental</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      function greeting(props) {
+        return (
+          <div>
+            <h1>{props.title}</h1>
+            <input type="text" placeholder={props.inputPlaceholder} />
+            <button>{props.buttonLabel}</button>
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(
+        greeting({
+          title: "Welcome",
+          inputPlaceholder: "enter your name",
+          buttonLabel: "Say hi",
+        }),
+        root
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>React Fundamental</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      // ubah nama function berikut menjadi uppercase
+      function greeting(props) {
+        return (
+          <div>
+            <h1>{props.title}</h1>
+            <input placeholder={props.inputPlaceholder} />
+            <button>{props.buttonLabel}</button>
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(
+        // ubah implementasi berikut menggunakan jsx
+        React.createElement(greeting, {
+          title: "Welcome",
+          inputPlaceholder: "enter your name",
+          buttonLabel: "Say hi",
+        }),
+        root
+      );
+    </script>
+  </body>
+</html>

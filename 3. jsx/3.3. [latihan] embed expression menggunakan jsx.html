@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>React Fundamental</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      const props = {
+        title: "Welcome",
+        inputPlaceholder: "enter your name",
+        buttonLabel: "Say hi",
+      };
+
+      const greeting = (
+        <div>
+          {/* embed props.title sebagai children dari h1 */}
+          <h1>Welcome</h1>
+          {/* embed props.inputPlaceholder sebagai placeholder dari input */}
+          <input type="text" placeholder="enter your name" />
+          {/* embed props.buttonLabel sebagai children dari button */}
+          <button>Say hi</button>
+        </div>
+      );
+
+      const root = document.getElementById("root");
+      ReactDOM.render(greeting, root);
+    </script>
+  </body>
+</html>
