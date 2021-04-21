@@ -53,14 +53,14 @@
     <script type="text/babel">
       function Greeting(props) {
         return (
-          // 💻 terapkan class .card pada div
+          // 💻 terapkan class .card pada div menggunakan className props
           // 📖 https://reactjs.org/docs/faq-styling.html#how-do-i-add-css-classes-to-components
           <div>
-            {/* terapkan class .title pada h1 */}
+            {/* terapkan class .title pada h1 menggunakan className props */}
             <h1>{props.title}</h1>
-            {/* terapkan class .input pada input */}
+            {/* terapkan class .input pada input menggunakan className props */}
             <input placeholder={props.inputPlaceholder} />
-            {/* terapkan class .button pada button */}
+            {/* terapkan class .button pada button menggunakan className props */}
             <button>{props.buttonLabel}</button>
           </div>
         );
