@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>React Fundamental</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      function Greeting(props) {
+        // 💻 buatlah function handleInputChange yang menerima parameter event
+
+        // 💻 di dalam function handleInputChange, tampilkan value yang sedang diketik oleh user menggunakan console.log
+        // 📋 console.log(event.target.value)
+
+        // 💻 buatlah function handleButtonClick
+        // 💻 di dalam function handleButtonClick, tampilkan "Hi everyone" menggunakan alert
+
+        return (
+          <div>
+            <h1>{props.title}</h1>
+            {/* 💻 terapkan function handleInputChange pada props onChange */}
+            <input placeholder={props.inputPlaceholder} />
+
+            {/* 💻 terapkan function handleButtonClick pada props onClick */}
+            <button>{props.buttonLabel}</button>
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(
+        <Greeting
+          title="Welcome"
+          inputPlaceholder="enter your name"
+          buttonLabel="Say hi"
+        />,
+        root
+      );
+    </script>
+  </body>
+</html>
