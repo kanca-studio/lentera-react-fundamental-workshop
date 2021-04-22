@@ -14,9 +14,48 @@
     <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+
+    <!-- 💻 matikan comment dibawah ini untuk menggunakan styled component -->
+    <!-- <script src="https://unpkg.com/react-is@17.0.2/umd/react-is.production.min.js"></script> -->
+
+    <!-- 💻 matikan comment dibawah ini untuk menggunakan styled component -->
+    <!-- <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script> -->
+
     <script type="text/babel">
+      // 💻 buatlah component Card menggunakan styled component yang akan menerapkan styling dari div
+      // 📖 https://styled-components.com/docs/basics#getting-started
+      // 📖 https://styled-components.com/docs/basics#adapting-based-on-props
+      const Card = null;
+
+      // 💻 buatlah component Title menggunakan styled component yang akan menerapkan styling dari h1
+      const Title = null;
+
+      // 💻 buatlah component Input menggunakan styled component yang akan menerapkan styling dari input
+      const Input = null;
+
+      // 💻 buatlah component Button menggunakan styled component yang akan menerapkan styling dari button
+      const Button = null;
+
       function Greeting(props) {
+        const [inputValue, setInputValue] = React.useState(
+          localStorage.getItem("inputValue") ?? ""
+        );
+
+        React.useEffect(() => {
+          localStorage.setItem("inputValue", inputValue);
+        }, [inputValue]);
+
+        function handleInputChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleButtonClick() {
+          alert("Hi " + inputValue);
+          setInputValue("");
+        }
+
         return (
+          // 💻 gunakan component Card untuk menggantikan div, jangan lupa berikan props colorMode={props.colorMode}
           <div
             style={{
               padding: "25px",
@@ -26,6 +65,7 @@
                 props.colorMode === "dark" ? "#000000" : "#ffffff",
             }}
           >
+            {/* 💻 gunakan component Title untuk menggantikan h1, jangan lupa berikan props colorMode={props.colorMode} */}
             <h1
               style={{
                 fontFamily: "Arial, Helvetica, sans-serif",
@@ -35,8 +75,11 @@
             >
               {props.title}
             </h1>
+            {/* 💻 gunakan component Input untuk menggantikan input, jangan lupa berikan props colorMode={props.colorMode} */}
             <input
               placeholder={props.inputPlaceholder}
+              onChange={handleInputChange}
+              value={inputValue}
               style={{
                 padding: "5px 15px",
                 border: "none",
@@ -49,7 +92,9 @@
                 backgroundColor: "transparent",
               }}
             />
+            {/* 💻 gunakan component Button untuk menggantikan button */}
             <button
+              onClick={handleButtonClick}
               style={{
                 padding: "10px 15px",
                 borderRadius: "5px",

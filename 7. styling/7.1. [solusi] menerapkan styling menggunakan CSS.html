@@ -52,11 +52,35 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
+        const [inputValue, setInputValue] = React.useState(
+          localStorage.getItem("inputValue") ?? ""
+        );
+
+        React.useEffect(() => {
+          localStorage.setItem("inputValue", inputValue);
+        }, [inputValue]);
+
+        function handleInputChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleButtonClick() {
+          alert("Hi " + inputValue);
+          setInputValue("");
+        }
+
         return (
           <div className="card">
             <h1 className="title">{props.title}</h1>
-            <input placeholder={props.inputPlaceholder} className="input" />
-            <button className="button">{props.buttonLabel}</button>
+            <input
+              className="input"
+              placeholder={props.inputPlaceholder}
+              onChange={handleInputChange}
+              value={inputValue}
+            />
+            <button className="button" onClick={handleButtonClick}>
+              {props.buttonLabel}
+            </button>
           </div>
         );
       }

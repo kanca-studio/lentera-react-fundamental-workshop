@@ -9,16 +9,23 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
-        // 💻 buatlah function handleButtonClick
-        // 💻 di dalam function handleButtonClick, tampilkan "Hi everyone" menggunakan alert
+        function handleButtonClick() {
+          // 💻 ambil value dari input kemudian simpan ke variable inputValue
+          // 📖 https://www.w3schools.com/jsref/prop_text_value.asp
+          const inputValue = null;
+
+          // 💻 tampilkan variable inputValue menggunakan alert
+          alert("Hi everyone");
+
+          // 💻 ubah value dari input menjadi ""
+        }
 
         return (
           <div>
             <h1>{props.title}</h1>
+            {/* 💻 tambahkan id="input" agar input bisa diakses menggunakan document.getElementById */}
             <input placeholder={props.inputPlaceholder} />
-
-            {/* 💻 terapkan function handleButtonClick pada props onClick */}
-            <button>{props.buttonLabel}</button>
+            <button onClick={handleButtonClick}>{props.buttonLabel}</button>
           </div>
         );
       }

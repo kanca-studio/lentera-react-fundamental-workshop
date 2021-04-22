@@ -8,6 +8,7 @@
         align-items: center;
       }
 
+      /* 💻 hapus class .card berikut */
       .card {
         padding: 25px;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
@@ -15,12 +16,14 @@
         background-color: #ffffff;
       }
 
+      /* 💻 hapus class .title berikut */
       .title {
         font-family: Arial, Helvetica, sans-serif;
         text-align: center;
         color: #000000;
       }
 
+      /* 💻 hapus class .input berikut */
       .input {
         padding: 5px 15px;
         border: none;
@@ -32,6 +35,7 @@
         background-color: transparent;
       }
 
+      /* 💻 hapus class .button berikut */
       .button {
         padding: 10px 15px;
         border-radius: 5px;
@@ -52,16 +56,43 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
+        const [inputValue, setInputValue] = React.useState(
+          localStorage.getItem("inputValue") ?? ""
+        );
+
+        React.useEffect(() => {
+          localStorage.setItem("inputValue", inputValue);
+        }, [inputValue]);
+
+        function handleInputChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleButtonClick() {
+          alert("Hi " + inputValue);
+          setInputValue("");
+        }
+
         return (
-          // 💻 terapkan class .card pada div menggunakan className props
-          // 📖 https://reactjs.org/docs/faq-styling.html#how-do-i-add-css-classes-to-components
-          <div>
-            {/* terapkan class .title pada h1 menggunakan className props */}
-            <h1>{props.title}</h1>
-            {/* terapkan class .input pada input menggunakan className props */}
-            <input placeholder={props.inputPlaceholder} />
-            {/* terapkan class .button pada button menggunakan className props */}
-            <button>{props.buttonLabel}</button>
+          // 💻 hapus props className dan terapkan inline styling pada div menggunakan props style
+          // 📖 https://reactjs.org/docs/dom-elements.html#style
+          // 📋 style={{ padding: "25px", boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.2)", borderRadius: "8px", backgroundColor: "#ffffff" }}
+          <div className="card">
+            {/* 💻 hapus props className dan terapkan inline styling pada h1 menggunakan props style */}
+            <h1 className="title">{props.title}</h1>
+
+            {/* 💻 hapus props className dan terapkan inline styling pada input menggunakan props style */}
+            <input
+              placeholder={props.inputPlaceholder}
+              onChange={handleInputChange}
+              value={inputValue}
+              className="input"
+            />
+
+            {/* 💻 hapus props className dan terapkan inline styling pada button menggunakan props style */}
+            <button className="button" onClick={handleButtonClick}>
+              {props.buttonLabel}
+            </button>
           </div>
         );
       }

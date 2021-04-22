@@ -16,33 +16,54 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
+        const [inputValue, setInputValue] = React.useState(
+          localStorage.getItem("inputValue") ?? ""
+        );
+
+        React.useEffect(() => {
+          localStorage.setItem("inputValue", inputValue);
+        }, [inputValue]);
+
+        function handleInputChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleButtonClick() {
+          alert("Hi " + inputValue);
+          setInputValue("");
+        }
+
         return (
           <div
             style={{
               padding: "25px",
               boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.2)",
               borderRadius: "8px",
-              backgroundColor: "#ffffff",
+              backgroundColor:
+                props.colorMode === "dark" ? "#000000" : "#ffffff",
             }}
           >
             <h1
               style={{
                 fontFamily: "Arial, Helvetica, sans-serif",
                 textAlign: "center",
-                color: "#000000",
+                color: props.colorMode === "dark" ? "#ffffff" : "#000000",
               }}
             >
               {props.title}
             </h1>
             <input
               placeholder={props.inputPlaceholder}
+              onChange={handleInputChange}
+              value={inputValue}
               style={{
                 padding: "5px 15px",
                 border: "none",
                 borderBottomStyle: "solid",
                 borderBottomWidth: "2px",
-                borderBottomColor: "#000000",
-                color: "#000000",
+                borderBottomColor:
+                  props.colorMode === "dark" ? "#ffffff" : "#000000",
+                color: props.colorMode === "dark" ? "#ffffff" : "#000000",
                 outline: "none",
                 backgroundColor: "transparent",
               }}
@@ -72,6 +93,7 @@
           title="Welcome"
           inputPlaceholder="enter your name"
           buttonLabel="Say hi"
+          colorMode="dark"
         />,
         root
       );

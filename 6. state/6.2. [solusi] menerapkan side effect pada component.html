@@ -9,16 +9,32 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
-        // 💻 buatlah function handleButtonClick
-        // 💻 di dalam function handleButtonClick, tampilkan "Hi everyone" menggunakan alert
+        const [inputValue, setInputValue] = React.useState(
+          localStorage.getItem("inputValue") ?? ""
+        );
+
+        React.useEffect(() => {
+          localStorage.setItem("inputValue", inputValue);
+        }, [inputValue]);
+
+        function handleInputChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleButtonClick() {
+          alert("Hi " + inputValue);
+          setInputValue("");
+        }
 
         return (
           <div>
             <h1>{props.title}</h1>
-            <input placeholder={props.inputPlaceholder} />
-
-            {/* 💻 terapkan function handleButtonClick pada props onClick */}
-            <button>{props.buttonLabel}</button>
+            <input
+              placeholder={props.inputPlaceholder}
+              onChange={handleInputChange}
+              value={inputValue}
+            />
+            <button onClick={handleButtonClick}>{props.buttonLabel}</button>
           </div>
         );
       }
