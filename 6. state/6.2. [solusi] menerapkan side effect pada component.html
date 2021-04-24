@@ -10,7 +10,7 @@
     <script type="text/babel">
       function Greeting(props) {
         const [inputValue, setInputValue] = React.useState(
-          localStorage.getItem("inputValue") ?? ""
+          localStorage.getItem("inputValue")
         );
 
         React.useEffect(() => {
@@ -35,6 +35,7 @@
               value={inputValue}
             />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
+            <p>Hi {inputValue}</p>
           </div>
         );
       }

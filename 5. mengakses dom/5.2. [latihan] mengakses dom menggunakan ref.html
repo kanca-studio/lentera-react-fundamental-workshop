@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
-        // 💻 buat sebuah ref menggunakan React.useRef kemudian simpan ke variable inputRef
+        // 💻 buat sebuah ref menggunakan React.useRef dengan default value null kemudian simpan ke variable inputRef
         // 📖 https://reactjs.org/docs/hooks-reference.html#useref
         const inputRef = null;
 
@@ -26,7 +26,7 @@
         return (
           <div>
             <h1>{props.title}</h1>
-            {/* 💻 hapus id="input" dan terapkan inputRef pada input menggunakan props ref */}
+            {/* 💻 hapus props id="input" dan tambahkan props ref={inputRef} */}
             <input id="input" placeholder={props.inputPlaceholder} />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
           </div>

@@ -17,7 +17,7 @@
     <script type="text/babel">
       function Greeting(props) {
         const [inputValue, setInputValue] = React.useState(
-          localStorage.getItem("inputValue") ?? ""
+          localStorage.getItem("inputValue")
         );
 
         React.useEffect(() => {
@@ -86,6 +86,16 @@
             >
               {props.buttonLabel}
             </button>
+            <p
+              style={{
+                fontFamily: "Arial, Helvetica, sans-serif",
+                textAlign: "center",
+                // 💻 ubah color menjadi #ffffff apabila props.colorMode === "dark", jika tidak maka ubah menjadi #000000
+                color: "#000000",
+              }}
+            >
+              Hi {inputValue}
+            </p>
           </div>
         );
       }

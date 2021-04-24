@@ -10,20 +10,22 @@
     <script type="text/babel">
       function Greeting(props) {
         function handleButtonClick() {
-          // 💻 ambil value dari input kemudian simpan ke variable inputValue
+          // 💻 ambil value dari input menggunakan document.getElementById kemudian simpan ke variable inputValue
           // 📖 https://www.w3schools.com/jsref/prop_text_value.asp
           const inputValue = null;
 
           // 💻 tampilkan variable inputValue menggunakan alert
+          // 📋 "Hi " + inputValue
           alert("Hi everyone");
 
           // 💻 ubah value dari input menjadi ""
+          // 📖 https://www.w3schools.com/jsref/prop_text_value.asp
         }
 
         return (
           <div>
             <h1>{props.title}</h1>
-            {/* 💻 tambahkan id="input" agar input bisa diakses menggunakan document.getElementById */}
+            {/* 💻 tambahkan props id="input" agar input bisa diakses menggunakan document.getElementById */}
             <input placeholder={props.inputPlaceholder} />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
           </div>
