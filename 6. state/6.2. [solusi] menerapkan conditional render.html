@@ -9,16 +9,7 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
-        // 💻 ubah default value dari state inputValue menggunakan localstorage.getItem
-        // 📖 https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
         const [inputValue, setInputValue] = React.useState("");
-
-        React.useEffect(() => {
-          // 💻 simpan inputValue ke localstorage.setItem
-          // 📖 https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-          // 💻 tambahkan state inputValue sebagai dependency, agar side effect ini dipanggil setiap kali state inputValue berubah
-          // 📖 https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect
-        }, []);
 
         function handleInputChange(event) {
           setInputValue(event.target.value);
@@ -38,6 +29,7 @@
               value={inputValue}
             />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
+            {inputValue !== "" ? <p>Hi {inputValue}</p> : null}
           </div>
         );
       }

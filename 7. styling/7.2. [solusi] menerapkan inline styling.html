@@ -83,15 +83,17 @@
               {props.buttonLabel}
             </button>
 
-            <p
-              style={{
-                fontFamily: "Arial, Helvetica, sans-serif",
-                textAlign: "center",
-                color: "#000000",
-              }}
-            >
-              Hi {inputValue}
-            </p>
+            {inputValue !== "" ? (
+              <p
+                style={{
+                  fontFamily: "Arial, Helvetica, sans-serif",
+                  textAlign: "center",
+                  color: "#000000",
+                }}
+              >
+                Hi {inputValue}
+              </p>
+            ) : null}
           </div>
         );
       }

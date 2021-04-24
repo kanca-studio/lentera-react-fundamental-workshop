@@ -91,7 +91,7 @@
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
 
             {/* 💻 terapkan class .text pada p menggunakan props className */}
-            <p>Hi {inputValue}</p>
+            {inputValue !== "" ? <p>Hi {inputValue}</p> : null}
           </div>
         );
       }

@@ -9,13 +9,7 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
-        const [inputValue, setInputValue] = React.useState(
-          localStorage.getItem("inputValue")
-        );
-
-        React.useEffect(() => {
-          localStorage.setItem("inputValue", inputValue);
-        }, [inputValue]);
+        const [inputValue, setInputValue] = React.useState("");
 
         function handleInputChange(event) {
           setInputValue(event.target.value);
@@ -35,6 +29,8 @@
               value={inputValue}
             />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
+            {/* 💻 tampilkan p apabila inputValue tidak kosong */}
+            {/* 📖 https://reactjs.org/docs/conditional-rendering.html#inline-if-else-with-conditional-operator */}
             <p>Hi {inputValue}</p>
           </div>
         );

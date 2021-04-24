@@ -87,7 +87,7 @@
             <button className="button" onClick={handleButtonClick}>
               {props.buttonLabel}
             </button>
-            <p className="text">Hi {inputValue}</p>
+            {inputValue !== "" ? <p className="text">Hi {inputValue}</p> : null}
           </div>
         );
       }

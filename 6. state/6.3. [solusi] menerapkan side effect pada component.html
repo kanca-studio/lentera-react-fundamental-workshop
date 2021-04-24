@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>React Fundamental</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      function Greeting(props) {
+        const [inputValue, setInputValue] = React.useState(
+          localStorage.getItem("inputValue")
+        );
+
+        React.useEffect(() => {
+          localStorage.setItem("inputValue", inputValue);
+        }, [inputValue]);
+
+        function handleInputChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleButtonClick() {
+          alert("Hi " + inputValue);
+          setInputValue("");
+        }
+
+        return (
+          <div>
+            <h1>{props.title}</h1>
+            <input
+              placeholder={props.inputPlaceholder}
+              onChange={handleInputChange}
+              value={inputValue}
+            />
+            <button onClick={handleButtonClick}>{props.buttonLabel}</button>
+            {inputValue !== "" ? <p>Hi {inputValue}</p> : null}
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(
+        <Greeting
+          title="Welcome"
+          inputPlaceholder="enter your name"
+          buttonLabel="Say hi"
+        />,
+        root
+      );
+    </script>
+  </body>
+</html>

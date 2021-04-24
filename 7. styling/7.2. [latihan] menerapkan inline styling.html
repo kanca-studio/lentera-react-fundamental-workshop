@@ -102,7 +102,7 @@
             </button>
 
             {/* 💻 hapus props className dan terapkan inline styling pada p menggunakan props style */}
-            <p className="text">Hi {inputValue}</p>
+            {inputValue !== "" ? <p className="text">Hi {inputValue}</p> : null}
           </div>
         );
       }

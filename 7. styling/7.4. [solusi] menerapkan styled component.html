@@ -92,7 +92,9 @@
               colorMode={props.colorMode}
             />
             <Button onClick={handleButtonClick}>{props.buttonLabel}</Button>
-            <Text colorMode={props.colorMode}>Hi {inputValue}</Text>
+            {inputValue !== "" ? (
+              <Text colorMode={props.colorMode}>Hi {inputValue}</Text>
+            ) : null}
           </Card>
         );
       }
