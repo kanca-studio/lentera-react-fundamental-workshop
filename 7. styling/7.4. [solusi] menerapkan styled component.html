@@ -57,15 +57,44 @@
         cursor: pointer;
       `;
 
+      const Text = styled.p`
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        color: ${(props) =>
+          props.colorMode === "dark" ? "#ffffff" : "#000000"};
+      `;
+
       function Greeting(props) {
+        const [inputValue, setInputValue] = React.useState(
+          localStorage.getItem("inputValue")
+        );
+
+        React.useEffect(() => {
+          localStorage.setItem("inputValue", inputValue);
+        }, [inputValue]);
+
+        function handleInputChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleButtonClick() {
+          alert("Hi " + inputValue);
+          setInputValue("");
+        }
+
         return (
           <Card colorMode={props.colorMode}>
             <Title colorMode={props.colorMode}>{props.title}</Title>
             <Input
+              onChange={handleInputChange}
+              value={inputValue}
               placeholder={props.inputPlaceholder}
               colorMode={props.colorMode}
             />
-            <Button>{props.buttonLabel}</Button>
+            <Button onClick={handleButtonClick}>{props.buttonLabel}</Button>
+            {inputValue !== "" ? (
+              <Text colorMode={props.colorMode}>Hi {inputValue}</Text>
+            ) : null}
           </Card>
         );
       }

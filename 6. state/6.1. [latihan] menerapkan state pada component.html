@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>React Fundamental</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      function Greeting(props) {
+        // 💻 buatlah state baru menggunakan React.useState yang akan menyimpan value dari input
+        // 📖 https://reactjs.org/docs/hooks-reference.html#usestate
+        // 📋 const [inputValue, setInputValue] = React.useState("")
+        const inputRef = React.useRef(null);
+
+        function handleInputChange(event) {
+          // 💻 ubah state inputValue menjadi event.target.value menggunakan setInputValue
+        }
+
+        function handleButtonClick() {
+          // 💻 hapus deklarasi variable inputValue berikut, sekarang kita bisa langsung menggunakan inputValue melalui state
+          const inputValue = inputRef.current.value;
+
+          alert("Hi " + inputValue);
+
+          // 💻 ubah state inputValue menjadi "" menggunakan setInputValue
+          inputRef.current.value = "";
+        }
+
+        return (
+          <div>
+            <h1>{props.title}</h1>
+            {/* 💻 hapus props ref={inputRef}, kemudian tambahkan props value={inputValue} dan onChange={handleInputChange} */}
+            <input ref={inputRef} placeholder={props.inputPlaceholder} />
+            <button onClick={handleButtonClick}>{props.buttonLabel}</button>
+            {/* 💻 tampilkan state inputValue menggunakan <p>  */}
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(
+        <Greeting
+          title="Welcome"
+          inputPlaceholder="enter your name"
+          buttonLabel="Say hi"
+        />,
+        root
+      );
+    </script>
+  </body>
+</html>

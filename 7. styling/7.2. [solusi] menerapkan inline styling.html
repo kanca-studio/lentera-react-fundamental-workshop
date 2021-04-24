@@ -16,6 +16,23 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
+        const [inputValue, setInputValue] = React.useState(
+          localStorage.getItem("inputValue")
+        );
+
+        React.useEffect(() => {
+          localStorage.setItem("inputValue", inputValue);
+        }, [inputValue]);
+
+        function handleInputChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleButtonClick() {
+          alert("Hi " + inputValue);
+          setInputValue("");
+        }
+
         return (
           <div
             style={{
@@ -36,6 +53,8 @@
             </h1>
             <input
               placeholder={props.inputPlaceholder}
+              onChange={handleInputChange}
+              value={inputValue}
               style={{
                 padding: "5px 15px",
                 border: "none",
@@ -48,6 +67,7 @@
               }}
             />
             <button
+              onClick={handleButtonClick}
               style={{
                 padding: "10px 15px",
                 borderRadius: "5px",
@@ -62,6 +82,18 @@
             >
               {props.buttonLabel}
             </button>
+
+            {inputValue !== "" ? (
+              <p
+                style={{
+                  fontFamily: "Arial, Helvetica, sans-serif",
+                  textAlign: "center",
+                  color: "#000000",
+                }}
+              >
+                Hi {inputValue}
+              </p>
+            ) : null}
           </div>
         );
       }

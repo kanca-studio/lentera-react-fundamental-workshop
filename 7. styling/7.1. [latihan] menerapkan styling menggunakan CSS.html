@@ -43,6 +43,12 @@
         margin-top: 25px;
         cursor: pointer;
       }
+
+      .text {
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        color: #000000;
+      }
     </style>
   </head>
   <body>
@@ -52,11 +58,40 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
+        const [inputValue, setInputValue] = React.useState(
+          localStorage.getItem("inputValue")
+        );
+
+        React.useEffect(() => {
+          localStorage.setItem("inputValue", inputValue);
+        }, [inputValue]);
+
+        function handleInputChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleButtonClick() {
+          alert("Hi " + inputValue);
+          setInputValue("");
+        }
+
         return (
-          <div className="card">
-            <h1 className="title">{props.title}</h1>
-            <input placeholder={props.inputPlaceholder} className="input" />
-            <button className="button">{props.buttonLabel}</button>
+          // 💻 terapkan class .card pada div menggunakan props className
+          // 📖 https://reactjs.org/docs/faq-styling.html#how-do-i-add-css-classes-to-components
+          <div>
+            {/* 💻 terapkan class .title pada h1 menggunakan props className */}
+            <h1>{props.title}</h1>
+            {/* 💻 terapkan class .input pada input menggunakan props className */}
+            <input
+              placeholder={props.inputPlaceholder}
+              onChange={handleInputChange}
+              value={inputValue}
+            />
+            {/* 💻 terapkan class .button pada button menggunakan props className */}
+            <button onClick={handleButtonClick}>{props.buttonLabel}</button>
+
+            {/* 💻 terapkan class .text pada p menggunakan props className */}
+            {inputValue !== "" ? <p>Hi {inputValue}</p> : null}
           </div>
         );
       }

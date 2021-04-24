@@ -47,6 +47,13 @@
         margin-top: 25px;
         cursor: pointer;
       }
+
+      /* 💻 hapus class .text berikut */
+      .text {
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        color: #000000;
+      }
     </style>
   </head>
   <body>
@@ -56,6 +63,23 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
+        const [inputValue, setInputValue] = React.useState(
+          localStorage.getItem("inputValue")
+        );
+
+        React.useEffect(() => {
+          localStorage.setItem("inputValue", inputValue);
+        }, [inputValue]);
+
+        function handleInputChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleButtonClick() {
+          alert("Hi " + inputValue);
+          setInputValue("");
+        }
+
         return (
           // 💻 hapus props className dan terapkan inline styling pada div menggunakan props style
           // 📖 https://reactjs.org/docs/dom-elements.html#style
@@ -65,10 +89,20 @@
             <h1 className="title">{props.title}</h1>
 
             {/* 💻 hapus props className dan terapkan inline styling pada input menggunakan props style */}
-            <input placeholder={props.inputPlaceholder} className="input" />
+            <input
+              placeholder={props.inputPlaceholder}
+              onChange={handleInputChange}
+              value={inputValue}
+              className="input"
+            />
 
             {/* 💻 hapus props className dan terapkan inline styling pada button menggunakan props style */}
-            <button className="button">{props.buttonLabel}</button>
+            <button className="button" onClick={handleButtonClick}>
+              {props.buttonLabel}
+            </button>
+
+            {/* 💻 hapus props className dan terapkan inline styling pada p menggunakan props style */}
+            {inputValue !== "" ? <p className="text">Hi {inputValue}</p> : null}
           </div>
         );
       }
