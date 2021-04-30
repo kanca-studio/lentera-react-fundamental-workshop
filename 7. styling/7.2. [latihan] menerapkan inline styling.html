@@ -63,6 +63,7 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
+        const inputRef = React.useRef(null);
         const [inputValue, setInputValue] = React.useState(
           localStorage.getItem("inputValue")
         );
@@ -78,6 +79,7 @@
         function handleButtonClick() {
           alert("Hi " + inputValue);
           setInputValue("");
+          inputRef.current.focus();
         }
 
         return (
@@ -90,6 +92,7 @@
 
             {/* 💻 hapus props className dan terapkan inline styling pada input menggunakan props style */}
             <input
+              ref={inputRef}
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
               value={inputValue}
