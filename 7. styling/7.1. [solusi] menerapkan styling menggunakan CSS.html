@@ -58,6 +58,7 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
+        const inputRef = React.useRef(null);
         const [inputValue, setInputValue] = React.useState(
           localStorage.getItem("inputValue")
         );
@@ -73,12 +74,14 @@
         function handleButtonClick() {
           alert("Hi " + inputValue);
           setInputValue("");
+          inputRef.current.focus();
         }
 
         return (
           <div className="card">
             <h1 className="title">{props.title}</h1>
             <input
+              ref={inputRef}
               className="input"
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
