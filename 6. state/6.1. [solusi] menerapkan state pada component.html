@@ -18,7 +18,6 @@
 
         function handleButtonClick() {
           alert("Hi " + inputValue);
-          setInputValue("");
           inputRef.current.focus();
         }
 
@@ -29,7 +28,6 @@
               ref={inputRef}
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
-              value={inputValue}
             />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
             <p>Hi {inputValue}</p>

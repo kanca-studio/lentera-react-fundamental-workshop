@@ -9,6 +9,9 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
+        // 💻 hapus ref inputValue berikut
+        const inputValue = React.useRef("");
+
         const inputRef = React.useRef(null);
 
         // 💻 buatlah state baru menggunakan React.useState yang akan menyimpan value dari input
@@ -17,25 +20,23 @@
 
         function handleInputChange(event) {
           // 💻 ubah state inputValue menjadi event.target.value menggunakan setInputValue
+          inputValue.current = event.target.value;
         }
 
         function handleButtonClick() {
-          // 💻 hapus deklarasi variable inputValue berikut, sekarang kita bisa langsung menggunakan inputValue melalui state
-          const inputValue = inputRef.current.value;
-
-          alert("Hi " + inputValue);
-
-          // 💻 ubah state inputValue menjadi "" menggunakan setInputValue
-          inputRef.current.value = "";
-
+          // 💻 tampilkan state inputValue pada alert
+          alert("Hi " + inputValue.current);
           inputRef.current.focus();
         }
 
         return (
           <div>
             <h1>{props.title}</h1>
-            {/* 💻 tambahkan props value={inputValue} dan onChange={handleInputChange} */}
-            <input ref={inputRef} placeholder={props.inputPlaceholder} />
+            <input
+              ref={inputRef}
+              placeholder={props.inputPlaceholder}
+              onChange={handleInputChange}
+            />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
             {/* 💻 tampilkan state inputValue menggunakan <p>  */}
           </div>

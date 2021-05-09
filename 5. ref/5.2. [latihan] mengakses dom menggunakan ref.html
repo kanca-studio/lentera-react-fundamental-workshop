@@ -9,28 +9,37 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
-        const inputRef = React.useRef(null);
-        const [inputValue, setInputValue] = React.useState("");
+        const inputValue = React.useRef("");
+
+        // 💻 buat sebuah ref menggunakan React.useRef dengan default value null kemudian simpan ke variable inputRef
+        const inputRef = null;
 
         function handleInputChange(event) {
-          setInputValue(event.target.value);
+          inputValue.current = event.target.value;
         }
 
         function handleButtonClick() {
-          alert("Hi " + inputValue);
+          alert("Hi " + inputValue.current);
           inputRef.current.focus();
+        }
+
+        function handleButtonClick() {
+          alert("Hi " + inputValue.current);
+
+          // 💻 pindahkan focus cursor ke input menggunakan inputRef
+          // 📖 https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/focus
+          // 📋 inputRef.current.focus()
         }
 
         return (
           <div>
             <h1>{props.title}</h1>
+            {/* 💻 tambahkan props ref={inputRef} pada input */}
             <input
-              ref={inputRef}
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
             />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
-            {inputValue !== "" ? <p>Hi {inputValue}</p> : null}
           </div>
         );
       }

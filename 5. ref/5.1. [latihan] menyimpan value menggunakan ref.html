@@ -9,26 +9,22 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
+        // 💻 buat sebuah ref menggunakan React.useRef dengan default value "" kemudian simpan ke variable inputValue
+        const inputValue = "";
+
+        function handleInputChange(event) {
+          // 💻 ubah value dari inputValue menjadi event.target.value
+        }
+
         function handleButtonClick() {
-          // 💻 ambil value dari input menggunakan document.getElementById kemudian simpan ke variable inputValue
-          // 📖 https://www.w3schools.com/jsref/prop_text_value.asp
-          const inputValue = null;
-
-          // 💻 tampilkan variable inputValue menggunakan alert
-          // 📋 "Hi " + inputValue
+          // 💻 tampilkan value dari inputValue pada alert
           alert("Hi everyone");
-
-          // 💻 ubah value dari input menjadi ""
-          // 📖 https://www.w3schools.com/jsref/prop_text_value.asp
-
-          // 💻 pindahkan focus cursor ke input
-          // 📖 https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/focus
         }
 
         return (
           <div>
             <h1>{props.title}</h1>
-            {/* 💻 tambahkan props id="input" agar input bisa diakses menggunakan document.getElementById */}
+            {/* 💻 tambahkan props onChange={handleInputChange} ke input */}
             <input placeholder={props.inputPlaceholder} />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
           </div>

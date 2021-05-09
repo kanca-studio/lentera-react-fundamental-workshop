@@ -9,17 +9,23 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
+        const inputValue = React.useRef("");
+
+        function handleInputChange(event) {
+          inputValue.current = event.target.value;
+        }
+
         function handleButtonClick() {
-          const inputValue = document.getElementById("input").value;
-          alert("Hi " + inputValue);
-          document.getElementById("input").value = "";
-          document.getElementById("input").focus();
+          alert("Hi " + inputValue.current);
         }
 
         return (
           <div>
             <h1>{props.title}</h1>
-            <input id="input" placeholder={props.inputPlaceholder} />
+            <input
+              placeholder={props.inputPlaceholder}
+              onChange={handleInputChange}
+            />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
           </div>
         );

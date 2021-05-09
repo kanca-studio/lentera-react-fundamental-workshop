@@ -18,6 +18,8 @@
 
         function handleButtonClick() {
           alert("Hi " + inputValue);
+          // 💻 ubah inputValue menjadi "" menggunakan setInputValue
+
           inputRef.current.focus();
         }
 
@@ -28,6 +30,7 @@
               ref={inputRef}
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
+              // 💻 tambahkan props value={inputValue} pada input
             />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
             {inputValue !== "" ? <p>Hi {inputValue}</p> : null}
