@@ -16,7 +16,6 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
-        const inputRef = React.useRef(null);
         const [inputValue, setInputValue] = React.useState(
           localStorage.getItem("inputValue")
         );
@@ -32,7 +31,6 @@
         function handleButtonClick() {
           alert("Hi " + inputValue);
           setInputValue("");
-          inputRef.current.focus();
         }
 
         return (
@@ -41,7 +39,6 @@
               padding: "25px",
               boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.2)",
               borderRadius: "8px",
-              // 💻 ubah backgroundColor menjadi #000000 apabila props.colorMode === "dark", jika tidak maka ubah menjadi #ffffff
               backgroundColor: "#ffffff",
             }}
           >
@@ -49,14 +46,12 @@
               style={{
                 fontFamily: "Arial, Helvetica, sans-serif",
                 textAlign: "center",
-                // 💻 ubah color menjadi #ffffff apabila props.colorMode === "dark", jika tidak maka ubah menjadi #000000
                 color: "#000000",
               }}
             >
               {props.title}
             </h1>
             <input
-              ref={inputRef}
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
               value={inputValue}
@@ -65,9 +60,7 @@
                 border: "none",
                 borderBottomStyle: "solid",
                 borderBottomWidth: "2px",
-                // 💻 ubah borderBottomColor menjadi #ffffff apabila props.colorMode === "dark", jika tidak maka ubah menjadi #000000
                 borderBottomColor: "#000000",
-                // 💻 ubah color menjadi #ffffff apabila props.colorMode === "dark", jika tidak maka ubah menjadi #000000
                 color: "#000000",
                 outline: "none",
                 backgroundColor: "transparent",
@@ -89,12 +82,12 @@
             >
               {props.buttonLabel}
             </button>
+
             {inputValue !== "" ? (
               <p
                 style={{
                   fontFamily: "Arial, Helvetica, sans-serif",
                   textAlign: "center",
-                  // 💻 ubah color menjadi #ffffff apabila props.colorMode === "dark", jika tidak maka ubah menjadi #000000
                   color: "#000000",
                 }}
               >
@@ -111,7 +104,6 @@
           title="Welcome"
           inputPlaceholder="enter your name"
           buttonLabel="Say hi"
-          // 💻 tambahkan props colorMode="dark" untuk mengganti color mode menjadi dark theme
         />,
         root
       );

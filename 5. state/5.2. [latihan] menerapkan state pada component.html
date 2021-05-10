@@ -9,28 +9,29 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
-        const inputRef = React.useRef(null);
-        const [inputValue, setInputValue] = React.useState("");
+        // 💻 ubah variable inputValue berikut menjadi state menggunakan React.useState
+        // 📖 https://reactjs.org/docs/hooks-reference.html#usestate
+        // 📋 const [inputValue, setInputValue] = React.useState("")
+        let inputValue = "";
 
         function handleInputChange(event) {
-          setInputValue(event.target.value);
+          // 💻 ubah state inputValue menjadi event.target.value menggunakan setInputValue
+          inputValue = event.target.value;
         }
 
         function handleButtonClick() {
           alert("Hi " + inputValue);
-          inputRef.current.focus();
         }
 
         return (
           <div>
             <h1>{props.title}</h1>
             <input
-              ref={inputRef}
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
             />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
-            <p>Hi {inputValue}</p>
+            {/* 💻 tampilkan state inputValue menggunakan <p>  */}
           </div>
         );
       }

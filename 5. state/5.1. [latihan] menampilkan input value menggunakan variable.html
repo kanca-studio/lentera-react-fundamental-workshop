@@ -9,22 +9,20 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
-        // 💻 buat sebuah ref menggunakan React.useRef dengan default value "" kemudian simpan ke variable inputValue
-        const inputValue = "";
+        // 💻 buatlah sebuah variable bernama inputValue dengan value ""
 
-        function handleInputChange(event) {
-          // 💻 ubah value dari inputValue menjadi event.target.value
-        }
+        // 💻 buatlah sebuah function dengan nama handleInputChange yang menerima sebuah parameter bernama event
+        // 💻 di dalam function handleInputChange, ubah value dari variable inputValue menjadi event.target.value
 
         function handleButtonClick() {
-          // 💻 tampilkan value dari inputValue pada alert
+          // 💻 tampilkan variable inputValue pada alert di bawah
           alert("Hi everyone");
         }
 
         return (
           <div>
             <h1>{props.title}</h1>
-            {/* 💻 tambahkan props onChange={handleInputChange} ke input */}
+            {/* 💻 tambahkan props onChange={handleInputChange} pada input */}
             <input placeholder={props.inputPlaceholder} />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
           </div>

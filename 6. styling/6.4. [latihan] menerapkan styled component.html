@@ -40,7 +40,6 @@
       const Text = null;
 
       function Greeting(props) {
-        const inputRef = React.useRef(null);
         const [inputValue, setInputValue] = React.useState(
           localStorage.getItem("inputValue")
         );
@@ -56,7 +55,6 @@
         function handleButtonClick() {
           alert("Hi " + inputValue);
           setInputValue("");
-          inputRef.current.focus();
         }
 
         return (
@@ -82,7 +80,6 @@
             </h1>
             {/* 💻 gunakan component Input untuk menggantikan input, jangan lupa berikan props colorMode={props.colorMode} */}
             <input
-              ref={inputRef}
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
               value={inputValue}

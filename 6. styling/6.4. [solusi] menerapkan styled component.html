@@ -65,7 +65,6 @@
       `;
 
       function Greeting(props) {
-        const inputRef = React.useRef(null);
         const [inputValue, setInputValue] = React.useState(
           localStorage.getItem("inputValue")
         );
@@ -81,14 +80,12 @@
         function handleButtonClick() {
           alert("Hi " + inputValue);
           setInputValue("");
-          inputRef.current.focus();
         }
 
         return (
           <Card colorMode={props.colorMode}>
             <Title colorMode={props.colorMode}>{props.title}</Title>
             <Input
-              ref={inputRef}
               onChange={handleInputChange}
               value={inputValue}
               placeholder={props.inputPlaceholder}

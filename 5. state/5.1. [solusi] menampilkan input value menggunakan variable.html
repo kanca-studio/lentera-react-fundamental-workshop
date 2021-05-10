@@ -9,36 +9,24 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
-        // 💻 hapus ref inputValue berikut
-        const inputValue = React.useRef("");
-
-        const inputRef = React.useRef(null);
-
-        // 💻 buatlah state baru menggunakan React.useState yang akan menyimpan value dari input
-        // 📖 https://reactjs.org/docs/hooks-reference.html#usestate
-        // 📋 const [inputValue, setInputValue] = React.useState("")
+        let inputValue = "";
 
         function handleInputChange(event) {
-          // 💻 ubah state inputValue menjadi event.target.value menggunakan setInputValue
-          inputValue.current = event.target.value;
+          inputValue = event.target.value;
         }
 
         function handleButtonClick() {
-          // 💻 tampilkan state inputValue pada alert
-          alert("Hi " + inputValue.current);
-          inputRef.current.focus();
+          alert("Hi " + inputValue);
         }
 
         return (
           <div>
             <h1>{props.title}</h1>
             <input
-              ref={inputRef}
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
             />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
-            {/* 💻 tampilkan state inputValue menggunakan <p>  */}
           </div>
         );
       }

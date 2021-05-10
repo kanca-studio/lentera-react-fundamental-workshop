@@ -9,7 +9,6 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
-        const inputRef = React.useRef(null);
         const [inputValue, setInputValue] = React.useState("");
 
         function handleInputChange(event) {
@@ -18,20 +17,16 @@
 
         function handleButtonClick() {
           alert("Hi " + inputValue);
-          inputRef.current.focus();
         }
 
         return (
           <div>
             <h1>{props.title}</h1>
             <input
-              ref={inputRef}
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
             />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
-            {/* 💻 tampilkan <p> apabila inputValue tidak kosong */}
-            {/* 📖 https://reactjs.org/docs/conditional-rendering.html#inline-if-else-with-conditional-operator */}
             <p>Hi {inputValue}</p>
           </div>
         );
