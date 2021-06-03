@@ -9,8 +9,11 @@
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
     <script type="text/babel">
       function Greeting(props) {
-        // 💻 ubah default value dari state inputValue menggunakan localstorage.getItem
-        // 📖 https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+        // 💻 ubah default value dari state inputValue di bawah menggunakan value dari localstorage
+        /*
+         * 📖 https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+         * Pada referensi diatas, kita bisa mengetahui cara untuk mengambil value dari localstorage pada bagian "Example"
+         */
         const [inputValue, setInputValue] = React.useState("");
 
         React.useEffect(() => {
