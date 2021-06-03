@@ -15,12 +15,18 @@
       };
 
       const greeting = (
-        // 📖 https://reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx
         <div>
           {/* 💻 embed props.title sebagai children dari h1 */}
+          {/*
+           * 📖 https://reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx
+           * Pada referensi di atas, ditunjukkan bagaimana cara mengembed variable ke dalam JSX.
+           * Dengan bermodalkan contoh diatas, kita bisa tau bagaimana cara mengembed props.title sebagai children dari h1
+           */}
           <h1>Welcome</h1>
+
           {/* 💻 embed props.inputPlaceholder sebagai placeholder dari input */}
           <input type="text" placeholder="enter your name" />
+
           {/* 💻 embed props.buttonLabel sebagai children dari button */}
           <button>Say hi</button>
         </div>
