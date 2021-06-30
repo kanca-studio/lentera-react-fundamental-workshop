@@ -6,6 +6,7 @@
         display: flex;
         justify-content: center;
         align-items: flex-start;
+        font-family: Arial, Helvetica, sans-serif;
       }
     </style>
   </head>
@@ -44,6 +45,10 @@
         background-color: transparent;
       `;
 
+      const Text = styled.p`
+        color: #424242;
+      `;
+
       function ListItem(props) {
         return (
           <Card
@@ -58,7 +63,7 @@
               alignItems: "center",
             }}
           >
-            <p>{props.item}</p>
+            <Text>{props.item}</Text>
             <Button variant="danger" onClick={props.onDelete}>
               Delete
             </Button>
@@ -68,16 +73,21 @@
 
       function List(props) {
         const [draggedIndex, setDraggedIndex] = React.useState();
+        const isEmpty = props.items.length === 0;
         return (
           <div>
-            {props.items.map((item, index) => (
-              <ListItem
-                item={item}
-                onDrag={() => setDraggedIndex(index)}
-                onDrop={() => props.onSwap(draggedIndex, index)}
-                onDelete={() => props.onDelete(index)}
-              />
-            ))}
+            {isEmpty ? (
+              <Text>You have no activity to do</Text>
+            ) : (
+              props.items.map((item, index) => (
+                <ListItem
+                  item={item}
+                  onDrag={() => setDraggedIndex(index)}
+                  onDrop={() => props.onSwap(draggedIndex, index)}
+                  onDelete={() => props.onDelete(index)}
+                />
+              ))
+            )}
           </div>
         );
       }
@@ -102,7 +112,11 @@
               onChange={handleChange}
               style={{ marginRight: 15 }}
             />
-            <Button variant="primary" onClick={handleSubmit}>
+            <Button
+              variant="primary"
+              onClick={handleSubmit}
+              disabled={input === ""}
+            >
               Add
             </Button>
           </div>
@@ -110,7 +124,13 @@
       }
 
       function App() {
-        const [items, setItems] = React.useState(["eat", "sleep"]);
+        const [items, setItems] = React.useState(
+          JSON.parse(localStorage.getItem("items"))
+        );
+
+        React.useEffect(() => {
+          localStorage.setItem("items", JSON.stringify(items));
+        }, [items]);
 
         function addItem(newItem) {
           setItems((prevItems) => [...prevItems, newItem]);
@@ -132,6 +152,7 @@
 
         return (
           <Card>
+            <Text>Todo List</Text>
             <Form onSubmit={addItem} />
             <List items={items} onDelete={deleteItem} onSwap={swapItem} />
           </Card>
