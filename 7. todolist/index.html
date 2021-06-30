@@ -1,32 +1,75 @@
 <html>
   <head>
     <title>Todolist</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script src="https://unpkg.com/react-is@17.0.2/umd/react-is.production.min.js"></script>
+    <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script>
     <script type="text/babel">
+      const Card = styled.div`
+        padding: 15px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+      `;
+
+      const Button = styled.button`
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        background-color: ${(props) =>
+          props.variant === "primary" ? "#6200ee" : "#f44366"};
+        color: white;
+        cursor: pointer;
+      `;
+
+      const Input = styled.input`
+        padding: 5px 15px;
+        border: none;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        border-bottom-color: #000000;
+        color: #000000;
+        outline: none;
+        background-color: transparent;
+      `;
+
       function ListItem(props) {
         return (
-          <li
+          <Card
             draggable
             onDragStart={props.onDrag}
             onDrop={props.onDrop}
             onDragOver={(event) => event.preventDefault()}
+            style={{
+              marginTop: 15,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
             <p>{props.item}</p>
-            <button onClick={props.onDelete}>Delete</button>
-          </li>
+            <Button variant="danger" onClick={props.onDelete}>
+              Delete
+            </Button>
+          </Card>
         );
       }
 
       function List(props) {
         const [draggedIndex, setDraggedIndex] = React.useState();
-
         return (
-          <ol>
+          <div>
             {props.items.map((item, index) => (
               <ListItem
                 item={item}
@@ -35,11 +78,11 @@
                 onDelete={() => props.onDelete(index)}
               />
             ))}
-          </ol>
+          </div>
         );
       }
 
-      function Input(props) {
+      function Form(props) {
         const [input, setInput] = React.useState("");
 
         function handleChange(event) {
@@ -53,8 +96,15 @@
 
         return (
           <div>
-            <input type="text" value={input} onChange={handleChange} />
-            <button onClick={handleSubmit}>add</button>
+            <Input
+              type="text"
+              value={input}
+              onChange={handleChange}
+              style={{ marginRight: 15 }}
+            />
+            <Button variant="primary" onClick={handleSubmit}>
+              Add
+            </Button>
           </div>
         );
       }
@@ -81,10 +131,10 @@
         }
 
         return (
-          <div>
-            <Input onSubmit={addItem} />
+          <Card>
+            <Form onSubmit={addItem} />
             <List items={items} onDelete={deleteItem} onSwap={swapItem} />
-          </div>
+          </Card>
         );
       }
 
