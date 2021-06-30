@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <title>Todolist</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      function ListItem(props) {
+        return (
+          <li
+            draggable
+            onDragStart={props.onDragStart}
+            onDrop={props.onDrop}
+            onDragOver={(event) => event.preventDefault()}
+          >
+            <p>{props.item}</p>
+            <button onClick={props.onDeleteButtonClick}>Delete</button>
+          </li>
+        );
+      }
+
+      function List(props) {
+        const [draggedIndex, setDraggedIndex] = React.useState();
+
+        function handleDrag(index) {
+          setDraggedIndex(index);
+        }
+
+        function handleDrop(index) {
+          props.onDragAndDrop(draggedIndex, index);
+        }
+
+        return (
+          <ol>
+            {props.items.map((item, index) => (
+              <ListItem
+                item={item}
+                onDragStart={() => handleDrag(index)}
+                onDrop={() => handleDrop(index)}
+                onDeleteButtonClick={() => props.onDeleteButtonClick(index)}
+              />
+            ))}
+          </ol>
+        );
+      }
+
+      function Input(props) {
+        const [input, setInput] = React.useState("");
+
+        function handleChange(event) {
+          setInput(event.target.value);
+        }
+
+        function handleSubmit() {
+          props.onSubmit(input);
+          setInput("");
+        }
+
+        return (
+          <div>
+            <input type="text" value={input} onChange={handleChange} />
+            <button onClick={handleSubmit}>add</button>
+          </div>
+        );
+      }
+
+      function App() {
+        const [items, setItems] = React.useState(["tes", "tus"]);
+
+        function handleSubmit(newItem) {
+          setItems((prev) => [...prev, newItem]);
+        }
+
+        function handleDeleteButtonClick(targetIndex) {
+          setItems((prev) =>
+            prev.filter((item, index) => index !== targetIndex)
+          );
+        }
+
+        function handleDragAndDrop(dragIndex, dropIndex) {
+          const tempItems = [...items];
+          const tempItem = tempItems[dragIndex];
+          tempItems[dragIndex] = tempItems[dropIndex];
+          tempItems[dropIndex] = tempItem;
+          setItems(tempItems);
+        }
+
+        return (
+          <div>
+            <Input onSubmit={handleSubmit} />
+            <List
+              items={items}
+              onDeleteButtonClick={handleDeleteButtonClick}
+              onDragAndDrop={handleDragAndDrop}
+            />
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>
