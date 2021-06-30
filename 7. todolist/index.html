@@ -125,7 +125,7 @@
 
       function App() {
         const [items, setItems] = React.useState(
-          JSON.parse(localStorage.getItem("items"))
+          JSON.parse(localStorage.getItem("items")) ?? []
         );
 
         React.useEffect(() => {
