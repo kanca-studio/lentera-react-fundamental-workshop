@@ -12,12 +12,12 @@
         return (
           <li
             draggable
-            onDragStart={props.onDragStart}
+            onDragStart={props.onDrag}
             onDrop={props.onDrop}
             onDragOver={(event) => event.preventDefault()}
           >
             <p>{props.item}</p>
-            <button onClick={props.onDeleteButtonClick}>Delete</button>
+            <button onClick={props.onDelete}>Delete</button>
           </li>
         );
       }
@@ -25,22 +25,14 @@
       function List(props) {
         const [draggedIndex, setDraggedIndex] = React.useState();
 
-        function handleDrag(index) {
-          setDraggedIndex(index);
-        }
-
-        function handleDrop(index) {
-          props.onDragAndDrop(draggedIndex, index);
-        }
-
         return (
           <ol>
             {props.items.map((item, index) => (
               <ListItem
                 item={item}
-                onDragStart={() => handleDrag(index)}
-                onDrop={() => handleDrop(index)}
-                onDeleteButtonClick={() => props.onDeleteButtonClick(index)}
+                onDrag={() => setDraggedIndex(index)}
+                onDrop={() => props.onSwap(draggedIndex, index)}
+                onDelete={() => props.onDelete(index)}
               />
             ))}
           </ol>
@@ -68,34 +60,30 @@
       }
 
       function App() {
-        const [items, setItems] = React.useState(["tes", "tus"]);
+        const [items, setItems] = React.useState(["eat", "sleep"]);
 
-        function handleSubmit(newItem) {
-          setItems((prev) => [...prev, newItem]);
+        function addItem(newItem) {
+          setItems((prevItems) => [...prevItems, newItem]);
         }
 
-        function handleDeleteButtonClick(targetIndex) {
-          setItems((prev) =>
-            prev.filter((item, index) => index !== targetIndex)
+        function deleteItem(targetIndex) {
+          setItems((prevItems) =>
+            prevItems.filter((item, index) => index !== targetIndex)
           );
         }
 
-        function handleDragAndDrop(dragIndex, dropIndex) {
+        function swapItem(firstIndex, secondIndex) {
           const tempItems = [...items];
-          const tempItem = tempItems[dragIndex];
-          tempItems[dragIndex] = tempItems[dropIndex];
-          tempItems[dropIndex] = tempItem;
+          const tempItem = tempItems[firstIndex];
+          tempItems[firstIndex] = tempItems[secondIndex];
+          tempItems[secondIndex] = tempItem;
           setItems(tempItems);
         }
 
         return (
           <div>
-            <Input onSubmit={handleSubmit} />
-            <List
-              items={items}
-              onDeleteButtonClick={handleDeleteButtonClick}
-              onDragAndDrop={handleDragAndDrop}
-            />
+            <Input onSubmit={addItem} />
+            <List items={items} onDelete={deleteItem} onSwap={swapItem} />
           </div>
         );
       }
