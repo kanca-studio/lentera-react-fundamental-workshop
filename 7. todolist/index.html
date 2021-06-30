@@ -50,17 +50,24 @@
       `;
 
       function ListItem(props) {
+        function handleDragOver(event) {
+          event.preventDefault();
+          props.onDragOver();
+        }
+
         return (
           <Card
             draggable
             onDragStart={props.onDrag}
+            onDragEnd={props.onDragEnd}
             onDrop={props.onDrop}
-            onDragOver={(event) => event.preventDefault()}
+            onDragOver={handleDragOver}
             style={{
               marginTop: 15,
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              border: props.active ? "solid 1px #6200ee" : null,
             }}
           >
             <Text>{props.item}</Text>
@@ -73,7 +80,15 @@
 
       function List(props) {
         const [draggedIndex, setDraggedIndex] = React.useState();
+        const [draggedOverIndex, setDraggedOverIndex] = React.useState();
+
+        function resetDragIndex() {
+          setDraggedIndex(undefined);
+          setDraggedOverIndex(undefined);
+        }
+
         const isEmpty = props.items.length === 0;
+
         return (
           <div>
             {isEmpty ? (
@@ -82,8 +97,11 @@
               props.items.map((item, index) => (
                 <ListItem
                   item={item}
+                  active={index === draggedOverIndex}
                   onDrag={() => setDraggedIndex(index)}
-                  onDrop={() => props.onSwap(draggedIndex, index)}
+                  onDragOver={() => setDraggedOverIndex(index)}
+                  onDragEnd={resetDragIndex}
+                  onDrop={() => props.onSwap(draggedIndex, draggedOverIndex)}
                   onDelete={() => props.onDelete(index)}
                 />
               ))
