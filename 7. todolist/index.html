@@ -22,6 +22,7 @@
         padding: 15px;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
         border-radius: 8px;
+        border: ${(props) => (props.active ? "solid 1px #6200ee" : "none")};
       `;
 
       const Button = styled.button`
@@ -58,16 +59,16 @@
         return (
           <Card
             draggable
-            onDragStart={props.onDrag}
+            onDragStart={props.onDragStart}
             onDragEnd={props.onDragEnd}
             onDrop={props.onDrop}
             onDragOver={handleDragOver}
+            active={props.active}
             style={{
               marginTop: 15,
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              border: props.active ? "solid 1px #6200ee" : null,
             }}
           >
             <Text>{props.item}</Text>
@@ -79,12 +80,12 @@
       }
 
       function List(props) {
-        const [draggedIndex, setDraggedIndex] = React.useState();
-        const [draggedOverIndex, setDraggedOverIndex] = React.useState();
+        const [dragIndex, setDragIndex] = React.useState();
+        const [dragOverIndex, setDragOverIndex] = React.useState();
 
         function resetDragIndex() {
-          setDraggedIndex(undefined);
-          setDraggedOverIndex(undefined);
+          setDragIndex(undefined);
+          setDragOverIndex(undefined);
         }
 
         const isEmpty = props.items.length === 0;
@@ -97,11 +98,11 @@
               props.items.map((item, index) => (
                 <ListItem
                   item={item}
-                  active={index === draggedOverIndex}
-                  onDrag={() => setDraggedIndex(index)}
-                  onDragOver={() => setDraggedOverIndex(index)}
+                  active={index === dragOverIndex}
+                  onDragStart={() => setDragIndex(index)}
+                  onDragOver={() => setDragOverIndex(index)}
                   onDragEnd={resetDragIndex}
-                  onDrop={() => props.onSwap(draggedIndex, draggedOverIndex)}
+                  onDrop={() => props.onSwap(dragIndex, dragOverIndex)}
                   onDelete={() => props.onDelete(index)}
                 />
               ))
