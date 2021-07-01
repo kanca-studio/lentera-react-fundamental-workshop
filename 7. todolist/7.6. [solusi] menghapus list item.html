@@ -18,17 +18,14 @@
       }
 
       function List(props) {
-        return (
-          <div>
-            {props.items.map((item, index) => (
-              <ListItem
-                key={item}
-                item={item}
-                onDelete={() => props.onDelete(index)}
-              />
-            ))}
-          </div>
-        );
+        const listItems = props.items.map((item, index) => (
+          <ListItem
+            key={item}
+            item={item}
+            onDelete={() => props.onDelete(index)}
+          />
+        ));
+        return <div>{listItems}</div>;
       }
 
       function Form(props) {

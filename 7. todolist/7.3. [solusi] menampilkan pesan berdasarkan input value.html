@@ -18,13 +18,10 @@
       }
 
       function List(props) {
-        return (
-          <div>
-            {props.items.map((item) => (
-              <ListItem key={item} item={item} />
-            ))}
-          </div>
-        );
+        const listItems = props.items.map((item) => (
+          <ListItem key={item} item={item} />
+        ));
+        return <div>{listItems}</div>;
       }
 
       function Form(props) {

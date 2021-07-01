@@ -19,20 +19,15 @@
 
       function List(props) {
         const isEmpty = props.items.length === 0;
+        const listItems = props.items.map((item, index) => (
+          <ListItem
+            key={item}
+            item={item}
+            onDelete={() => props.onDelete(index)}
+          />
+        ));
         return (
-          <div>
-            {isEmpty ? (
-              <p>You have no activity to do</p>
-            ) : (
-              props.items.map((item, index) => (
-                <ListItem
-                  key={item}
-                  item={item}
-                  onDelete={() => props.onDelete(index)}
-                />
-              ))
-            )}
-          </div>
+          <div>{isEmpty ? <p>You have no activity to do</p> : listItems}</div>
         );
       }
 

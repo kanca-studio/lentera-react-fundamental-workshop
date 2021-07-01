@@ -11,35 +11,43 @@
       function ListItem(props) {
         return (
           <div>
-            <p>{props.item}</p>
-            <button>Delete</button>
+            {/* 💻 tampilkan <p> dengan children props.item */}
+
+            {/* 💻 tampilkan <button> dengan children "Delete" */}
           </div>
         );
       }
 
-      function List(props) {
-        const listItems = props.items.map((item) => (
-          <ListItem key={item} item={item} />
-        ));
-        return <div>{listItems}</div>;
+      function List() {
+        return (
+          <div>
+            {/* 💻 tampilkan <ListItem> dengan props item="Eat" */}
+
+            {/* 💻 tampilkan <ListItem> dengan props item="Sleep" */}
+
+            {/* 💻 tampilkan <ListItem> dengan props item="Code" */}
+          </div>
+        );
       }
 
       function Form() {
         return (
           <div>
-            <input type="text" />
-            <button>Add</button>
+            {/* 💻 tampilkan <input> dengan props type="text" */}
+
+            {/* 💻 tampilkan <button> dengan children "Add" */}
           </div>
         );
       }
 
       function App() {
-        const items = ["Eat", "Sleep", "Code"];
         return (
           <div>
-            <p>Todo List</p>
-            <Form />
-            <List items={items} />
+            {/* 💻 tampilkan <p> dengan children "Todo List"  */}
+
+            {/* 💻 tampilkan <Form> */}
+
+            {/* 💻 tampilkan <List> */}
           </div>
         );
       }

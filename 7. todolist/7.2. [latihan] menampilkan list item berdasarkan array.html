@@ -18,10 +18,23 @@
       }
 
       function List(props) {
-        const listItems = props.items.map((item) => (
-          <ListItem key={item} item={item} />
-        ));
-        return <div>{listItems}</div>;
+        // 💻 ubah props.items yang semula adalah array of string menjadi array of element
+        /* 📖 untuk melakukan hal tersebut, anda dapat menggunakan array method map. Berikut contoh penerapannya :
+         * https://reactjs.org/docs/lists-and-keys.html
+         */
+        // 📋 const listItems = props.items.map((item) => <ListItem key={item} item={item} />)
+        const listItems = null;
+
+        return (
+          <div>
+            {/* 💻 hapus ketiga <ListItem> berikut */}
+            <ListItem item="Eat" />
+            <ListItem item="Sleep" />
+            <ListItem item="Code" />
+
+            {/* 💻 embed variable listItems */}
+          </div>
+        );
       }
 
       function Form() {
@@ -34,12 +47,14 @@
       }
 
       function App() {
-        const items = ["Eat", "Sleep", "Code"];
+        // 💻 buatlah array of string dengan nama items dan isilah dengan ["Eat", "Sleep", "Code"]
+
         return (
           <div>
             <p>Todo List</p>
             <Form />
-            <List items={items} />
+            {/* 💻 tambahkan props items={items} pada <List> */}
+            <List />
           </div>
         );
       }
