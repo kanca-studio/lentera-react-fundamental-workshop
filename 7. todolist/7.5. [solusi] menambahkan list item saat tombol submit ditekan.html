@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <title>Todolist</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      function ListItem(props) {
+        return (
+          <div>
+            <p>{props.item}</p>
+            <button>Delete</button>
+          </div>
+        );
+      }
+
+      function List(props) {
+        return (
+          <div>
+            {props.items.map((item) => (
+              <ListItem key={item} item={item} />
+            ))}
+          </div>
+        );
+      }
+
+      function Form(props) {
+        const [inputValue, setInputValue] = React.useState("");
+
+        function handleChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleSubmit() {
+          props.onSubmit(input);
+          setInputValue("");
+        }
+
+        return (
+          <div>
+            <input type="text" value={input} onChange={handleChange} />
+            <button disabled={input === ""} onClick={handleSubmit}>
+              Add
+            </button>
+          </div>
+        );
+      }
+
+      function App() {
+        const [items, setItems] = React.useState(["Eat", "Sleep", "Code"]);
+
+        function addItem(newItem) {
+          setItems((prevItems) => [...prevItems, newItem]);
+        }
+
+        return (
+          <div>
+            <p>Todo List</p>
+            <Form onSubmit={addItem} />
+            <List items={items} />
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

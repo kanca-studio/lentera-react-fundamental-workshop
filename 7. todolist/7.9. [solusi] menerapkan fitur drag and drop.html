@@ -1,0 +1,169 @@
+<html>
+  <head>
+    <title>Todolist</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script src="https://unpkg.com/react-is@17.0.2/umd/react-is.production.min.js"></script>
+    <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script>
+    <script type="text/babel">
+      const Card = styled.div`
+        padding: 15px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+      `;
+
+      const Button = styled.button`
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        background-color: ${(props) =>
+          props.variant === "primary" ? "#6200ee" : "#f44366"};
+        color: white;
+        cursor: pointer;
+      `;
+
+      const Input = styled.input`
+        padding: 5px 15px;
+        border: none;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        border-bottom-color: #000000;
+        color: #000000;
+        outline: none;
+        background-color: transparent;
+      `;
+
+      const Text = styled.p`
+        color: #424242;
+      `;
+
+      function ListItem(props) {
+        function handleDragOver(event) {
+          event.preventDefault();
+          props.onDragOver();
+        }
+
+        return (
+          <Card
+            draggable
+            onDragStart={props.onDragStart}
+            onDrop={props.onDrop}
+            onDragOver={handleDragOver}
+            style={{
+              marginTop: 15,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text>{props.item}</Text>
+            <Button variant="danger" onClick={props.onDelete}>
+              Delete
+            </Button>
+          </Card>
+        );
+      }
+
+      function List(props) {
+        const [dragIndex, setDragIndex] = React.useState();
+        const [dragOverIndex, setDragOverIndex] = React.useState();
+
+        const isEmpty = props.items.length === 0;
+        return (
+          <div>
+            {isEmpty ? (
+              <Text>You have no activity to do</Text>
+            ) : (
+              props.items.map((item, index) => (
+                <ListItem
+                  key={item}
+                  item={item}
+                  onDragStart={() => setDragIndex(index)}
+                  onDragOver={() => setDragOverIndex(index)}
+                  onDrop={() => props.onSwap(dragIndex, dragOverIndex)}
+                  onDelete={() => props.onDelete(index)}
+                />
+              ))
+            )}
+          </div>
+        );
+      }
+
+      function Form(props) {
+        const [inputValue, setInputValue] = React.useState("");
+
+        function handleChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleSubmit() {
+          props.onSubmit(input);
+          setInputValue("");
+        }
+
+        return (
+          <div>
+            <Input
+              type="text"
+              value={input}
+              onChange={handleChange}
+              style={{ marginRight: 15 }}
+            />
+            <Button
+              disabled={input === ""}
+              variant="primary"
+              onClick={handleSubmit}
+            >
+              Add
+            </Button>
+          </div>
+        );
+      }
+
+      function App() {
+        const [items, setItems] = React.useState(["Eat", "Sleep", "Code"]);
+
+        function addItem(newItem) {
+          setItems((prevItems) => [...prevItems, newItem]);
+        }
+
+        function deleteItem(targetIndex) {
+          setItems((prevItems) =>
+            prevItems.filter((item, index) => index !== targetIndex)
+          );
+        }
+
+        function swapItem(firstIndex, secondIndex) {
+          const tempItems = [...items];
+          const tempItem = tempItems[firstIndex];
+          tempItems[firstIndex] = tempItems[secondIndex];
+          tempItems[secondIndex] = tempItem;
+          setItems(tempItems);
+        }
+
+        return (
+          <Card>
+            <Text>Todo List</Text>
+            <Form onSubmit={addItem} />
+            <List items={items} onDelete={deleteItem} onSwap={swapItem} />
+          </Card>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

@@ -89,7 +89,6 @@
         }
 
         const isEmpty = props.items.length === 0;
-
         return (
           <div>
             {isEmpty ? (
@@ -97,6 +96,7 @@
             ) : (
               props.items.map((item, index) => (
                 <ListItem
+                  key={item}
                   item={item}
                   active={index === dragOverIndex}
                   onDragStart={() => setDragIndex(index)}
@@ -112,15 +112,15 @@
       }
 
       function Form(props) {
-        const [input, setInput] = React.useState("");
+        const [inputValue, setInputValue] = React.useState("");
 
         function handleChange(event) {
-          setInput(event.target.value);
+          setInputValue(event.target.value);
         }
 
         function handleSubmit() {
           props.onSubmit(input);
-          setInput("");
+          setInputValue("");
         }
 
         return (
@@ -132,9 +132,9 @@
               style={{ marginRight: 15 }}
             />
             <Button
+              disabled={input === ""}
               variant="primary"
               onClick={handleSubmit}
-              disabled={input === ""}
             >
               Add
             </Button>
@@ -143,13 +143,7 @@
       }
 
       function App() {
-        const [items, setItems] = React.useState(
-          JSON.parse(localStorage.getItem("items")) ?? []
-        );
-
-        React.useEffect(() => {
-          localStorage.setItem("items", JSON.stringify(items));
-        }, [items]);
+        const [items, setItems] = React.useState(["Eat", "Sleep", "Code"]);
 
         function addItem(newItem) {
           setItems((prevItems) => [...prevItems, newItem]);
