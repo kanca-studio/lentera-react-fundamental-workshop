@@ -109,7 +109,7 @@
         }
 
         function handleSubmit() {
-          props.onSubmit(input);
+          props.onSubmit(inputValue);
           setInputValue("");
         }
 
@@ -117,7 +117,7 @@
           <div>
             <Input
               type="text"
-              value={input}
+              value={inputValue}
               onChange={handleChange}
               style={{ marginRight: 15 }}
             />

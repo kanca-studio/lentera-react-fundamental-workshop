@@ -35,13 +35,13 @@
         }
 
         function handleSubmit() {
-          props.onSubmit(input);
+          props.onSubmit(inputValue);
           setInputValue("");
         }
 
         return (
           <div>
-            <input type="text" value={input} onChange={handleChange} />
+            <input type="text" value={inputValue} onChange={handleChange} />
             <button onClick={handleSubmit}>Add</button>
           </div>
         );
