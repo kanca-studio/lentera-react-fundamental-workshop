@@ -51,7 +51,7 @@
         return (
           <div>
             <input type="text" value={inputValue} onChange={handleChange} />
-            <button disabled={input === ""} onClick={handleSubmit}>
+            <button disabled={inputValue === ""} onClick={handleSubmit}>
               Add
             </button>
           </div>
