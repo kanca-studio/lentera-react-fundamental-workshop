@@ -120,6 +120,8 @@
           setInputValue("");
         }
 
+        const isEmpty = inputValue === "";
+
         return (
           <div>
             <Input
@@ -128,11 +130,7 @@
               onChange={handleChange}
               style={{ marginRight: 15 }}
             />
-            <Button
-              disabled={inputValue === ""}
-              variant="primary"
-              onClick={handleSubmit}
-            >
+            <Button disabled={isEmpty} variant="primary" onClick={handleSubmit}>
               Add
             </Button>
           </div>

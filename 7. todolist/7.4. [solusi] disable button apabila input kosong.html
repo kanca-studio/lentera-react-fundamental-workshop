@@ -36,10 +36,12 @@
           setInputValue("");
         }
 
+        const isEmpty = inputValue === "";
+
         return (
           <div>
             <input type="text" value={inputValue} onChange={handleChange} />
-            <button disabled={inputValue === ""} onClick={handleSubmit}>
+            <button disabled={isEmpty} onClick={handleSubmit}>
               Add
             </button>
           </div>
