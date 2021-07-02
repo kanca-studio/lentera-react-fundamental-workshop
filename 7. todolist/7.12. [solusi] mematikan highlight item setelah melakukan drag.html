@@ -80,12 +80,12 @@
       }
 
       function List(props) {
-        const [dragIndex, setDragIndex] = React.useState();
-        const [dragOverIndex, setDragOverIndex] = React.useState();
+        const [dragIndex, setDragIndex] = React.useState(null);
+        const [dragOverIndex, setDragOverIndex] = React.useState(null);
 
         function resetDragIndex() {
-          setDragIndex(undefined);
-          setDragOverIndex(undefined);
+          setDragIndex(null);
+          setDragOverIndex(null);
         }
 
         const isEmpty = props.items.length === 0;
@@ -151,11 +151,14 @@
         }
 
         function swapItem(firstIndex, secondIndex) {
-          const tempItems = [...items];
-          const tempItem = tempItems[firstIndex];
-          tempItems[firstIndex] = tempItems[secondIndex];
-          tempItems[secondIndex] = tempItem;
-          setItems(tempItems);
+          const newItems = items.map((item, index) =>
+            index === firstIndex
+              ? items[secondIndex]
+              : index === secondIndex
+              ? items[firstIndex]
+              : item
+          );
+          setItems(newItems);
         }
 
         return (

@@ -77,8 +77,8 @@
       }
 
       function List(props) {
-        const [dragIndex, setDragIndex] = React.useState();
-        const [dragOverIndex, setDragOverIndex] = React.useState();
+        const [dragIndex, setDragIndex] = React.useState(null);
+        const [dragOverIndex, setDragOverIndex] = React.useState(null);
 
         const isEmpty = props.items.length === 0;
         const listItems = props.items.map((item, index) => (
@@ -141,11 +141,14 @@
         }
 
         function swapItem(firstIndex, secondIndex) {
-          const tempItems = [...items];
-          const tempItem = tempItems[firstIndex];
-          tempItems[firstIndex] = tempItems[secondIndex];
-          tempItems[secondIndex] = tempItem;
-          setItems(tempItems);
+          const newItems = items.map((item, index) =>
+            index === firstIndex
+              ? items[secondIndex]
+              : index === secondIndex
+              ? items[firstIndex]
+              : item
+          );
+          setItems(newItems);
         }
 
         return (
