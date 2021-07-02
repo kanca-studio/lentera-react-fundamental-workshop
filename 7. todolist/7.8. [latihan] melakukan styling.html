@@ -1,0 +1,146 @@
+<html>
+  <head>
+    <title>Todolist</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script src="https://unpkg.com/react-is@17.0.2/umd/react-is.production.min.js"></script>
+    <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script>
+    <script type="text/babel">
+      const Card = styled.div`
+        padding: 15px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+      `;
+
+      const Button = styled.button`
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        background-color: #6200ee;
+        color: white;
+        cursor: pointer;
+      `;
+
+      const Input = styled.input`
+        padding: 5px 15px;
+        border: none;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        border-bottom-color: #000000;
+        color: #000000;
+        outline: none;
+        background-color: transparent;
+      `;
+
+      const Text = styled.p`
+        color: #424242;
+      `;
+
+      function ListItem(props) {
+        return (
+          // 💻 ubah <div> menjadi <Card>
+          <div
+            style={{
+              marginTop: 15,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            {/* 💻 ubah <p> menjadi <Text> */}
+            <p>{props.item}</p>
+            {/* 💻 ubah <button> menjadi <Button> */}
+            <button onClick={props.onDelete}>Delete</button>
+          </div>
+        );
+      }
+
+      function List(props) {
+        const isEmpty = props.items.length === 0;
+        const listItems = props.items.map((item, index) => (
+          <ListItem
+            key={item}
+            item={item}
+            onDelete={() => props.onDelete(index)}
+          />
+        ));
+        return (
+          <div>
+            {/* 💻 ubah <p> menjadi <Text> */}
+            {isEmpty ? <p>You have no activity to do</p> : listItems}
+          </div>
+        );
+      }
+
+      function Form(props) {
+        const [inputValue, setInputValue] = React.useState("");
+
+        function handleChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleSubmit() {
+          props.onSubmit(inputValue);
+          setInputValue("");
+        }
+
+        const isEmpty = inputValue === "";
+
+        return (
+          <div>
+            {/* 💻 ubah <input> menjadi <Input> */}
+            <input
+              type="text"
+              value={inputValue}
+              onChange={handleChange}
+              style={{ marginRight: 15 }}
+            />
+            {/* 💻 ubah <button> menjadi <Button> */}
+            <button disabled={isEmpty} onClick={handleSubmit}>
+              Add
+            </button>
+          </div>
+        );
+      }
+
+      function App() {
+        const [items, setItems] = React.useState(["Eat", "Sleep", "Code"]);
+
+        function addItem(newItem) {
+          const newItems = items.concat(newItem);
+          setItems(newItems);
+        }
+
+        function deleteItem(targetIndex) {
+          const newItems = items.filter((item, index) => index !== targetIndex);
+          setItems(newItems);
+        }
+
+        return (
+          // 💻 ubah <div> menjadi <Card>
+          <div>
+            {/* 💻 ubah <p> menjadi <Text> */}
+            <p>Todo List</p>
+            <Form onSubmit={addItem} />
+            <List items={items} onDelete={deleteItem} />
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>
