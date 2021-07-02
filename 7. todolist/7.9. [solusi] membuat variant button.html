@@ -121,9 +121,8 @@
         }
 
         function deleteItem(targetIndex) {
-          setItems((prevItems) =>
-            prevItems.filter((item, index) => index !== targetIndex)
-          );
+          const newItems = items.filter((item, index) => index !== targetIndex);
+          setItems(newItems);
         }
 
         return (
