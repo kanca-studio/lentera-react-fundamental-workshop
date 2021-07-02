@@ -147,8 +147,7 @@
         }, [items]);
 
         function addItem(newItem) {
-          const newItems = items.slice();
-          newItems.push(newItem);
+          const newItems = items.concat(newItem);
           setItems(newItems);
         }
 
