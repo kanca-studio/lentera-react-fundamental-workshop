@@ -52,11 +52,11 @@
         const [items, setItems] = React.useState(["Eat", "Sleep", "Code"]);
 
         function addItem(newItem) {
-          // 💻 tambahkan newItem ke array items.
-          /* 📖 untuk melakukan hal tersebut, anda bisa menggunakan spread syntax pada ES6 :
-           *
-           */
-          setItems((prevItems) => [...prevItems, newItem]);
+          // 💻 tambahkan newItem ke array items menggunakan array.concat, kemudian simpan ke variable newItems
+          // 📖 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
+          const newItems = [];
+
+          // 💻 ubah nilai dari items menjadi newItems menggunakan setItems
         }
 
         return (
