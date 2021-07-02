@@ -12,18 +12,14 @@
         return (
           <div>
             <p>{props.item}</p>
-            <button onClick={props.onDelete}>Delete</button>
+            <button>Delete</button>
           </div>
         );
       }
 
       function List(props) {
-        const listItems = props.items.map((item, index) => (
-          <ListItem
-            key={item}
-            item={item}
-            onDelete={() => props.onDelete(index)}
-          />
+        const listItems = props.items.map((item) => (
+          <ListItem key={item} item={item} />
         ));
         return <div>{listItems}</div>;
       }
@@ -56,22 +52,18 @@
         const [items, setItems] = React.useState(["Eat", "Sleep", "Code"]);
 
         function addItem(newItem) {
-          const newItems = items.slice();
-          newItems.push(newItem);
-          setItems(newItems);
-        }
-
-        function deleteItem(targetIndex) {
-          setItems((prevItems) =>
-            prevItems.filter((item, index) => index !== targetIndex)
-          );
+          // 💻 tambahkan newItem ke array items.
+          /* 📖 untuk melakukan hal tersebut, anda bisa menggunakan spread syntax pada ES6 :
+           *
+           */
+          setItems((prevItems) => [...prevItems, newItem]);
         }
 
         return (
           <div>
             <p>Todo List</p>
             <Form onSubmit={addItem} />
-            <List items={items} onDelete={deleteItem} />
+            <List items={items} />
           </div>
         );
       }

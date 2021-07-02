@@ -141,7 +141,9 @@
         const [items, setItems] = React.useState(["Eat", "Sleep", "Code"]);
 
         function addItem(newItem) {
-          setItems((prevItems) => [...prevItems, newItem]);
+          const newItems = items.slice();
+          newItems.push(newItem);
+          setItems(newItems);
         }
 
         function deleteItem(targetIndex) {
