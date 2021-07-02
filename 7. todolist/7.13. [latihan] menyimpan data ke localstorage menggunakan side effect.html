@@ -1,0 +1,186 @@
+<html>
+  <head>
+    <title>Todolist</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script src="https://unpkg.com/react-is@17.0.2/umd/react-is.production.min.js"></script>
+    <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script>
+    <script type="text/babel">
+      const Card = styled.div`
+        padding: 15px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        border: ${(props) => (props.active ? "solid 1px #6200ee" : "none")};
+      `;
+
+      const Button = styled.button`
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        background-color: ${(props) =>
+          props.variant === "primary" ? "#6200ee" : "#f44366"};
+        color: white;
+        cursor: pointer;
+      `;
+
+      const Input = styled.input`
+        padding: 5px 15px;
+        border: none;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        border-bottom-color: #000000;
+        color: #000000;
+        outline: none;
+        background-color: transparent;
+      `;
+
+      const Text = styled.p`
+        color: #424242;
+      `;
+
+      function ListItem(props) {
+        function handleDragOver(event) {
+          event.preventDefault();
+          props.onDragOver();
+        }
+
+        return (
+          <Card
+            draggable
+            onDragStart={props.onDragStart}
+            onDragEnd={props.onDragEnd}
+            onDrop={props.onDrop}
+            onDragOver={handleDragOver}
+            active={props.active}
+            style={{
+              marginTop: 15,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text>{props.item}</Text>
+            <Button variant="danger" onClick={props.onDelete}>
+              Delete
+            </Button>
+          </Card>
+        );
+      }
+
+      function List(props) {
+        const [dragIndex, setDragIndex] = React.useState(null);
+        const [dragOverIndex, setDragOverIndex] = React.useState(null);
+
+        function resetDragIndex() {
+          setDragIndex(null);
+          setDragOverIndex(null);
+        }
+
+        const isEmpty = props.items.length === 0;
+        const listItems = props.items.map((item, index) => (
+          <ListItem
+            key={item}
+            item={item}
+            active={index === dragOverIndex}
+            onDragStart={() => setDragIndex(index)}
+            onDragOver={() => setDragOverIndex(index)}
+            onDragEnd={resetDragIndex}
+            onDrop={() => props.onSwap(dragIndex, dragOverIndex)}
+            onDelete={() => props.onDelete(index)}
+          />
+        ));
+        return (
+          <div>
+            {isEmpty ? <Text>You have no activity to do</Text> : listItems}
+          </div>
+        );
+      }
+
+      function Form(props) {
+        const [inputValue, setInputValue] = React.useState("");
+
+        function handleChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleSubmit() {
+          props.onSubmit(inputValue);
+          setInputValue("");
+        }
+
+        const isEmpty = inputValue === "";
+
+        return (
+          <div>
+            <Input
+              type="text"
+              value={inputValue}
+              onChange={handleChange}
+              style={{ marginRight: 15 }}
+            />
+            <Button disabled={isEmpty} variant="primary" onClick={handleSubmit}>
+              Add
+            </Button>
+          </div>
+        );
+      }
+
+      function App() {
+        // 💻 ubah default value dari state items menjadi JSON.parse(localStorage.getItem("items")) ?? []
+        const [items, setItems] = React.useState(["Eat", "Sleep", "Code"]);
+
+        React.useEffect(() => {
+          /* 💻 simpan array items ke localStorage menggunakan localStorage.setItem
+           * jangan lupa untuk mengubah array items menjadi string terlebih dahulu menggunakan JSON.stringify
+           */
+          // 📖 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+          // 💻 tambahkan items sebagai dependency
+        }, []);
+
+        function addItem(newItem) {
+          const newItems = items.concat(newItem);
+          setItems(newItems);
+        }
+
+        function deleteItem(targetIndex) {
+          const newItems = items.filter((item, index) => index !== targetIndex);
+          setItems(newItems);
+        }
+
+        function swapItem(firstIndex, secondIndex) {
+          const newItems = items.map((item, index) =>
+            index === firstIndex
+              ? items[secondIndex]
+              : index === secondIndex
+              ? items[firstIndex]
+              : item
+          );
+          setItems(newItems);
+        }
+
+        return (
+          <Card>
+            <Text>Todo List</Text>
+            <Form onSubmit={addItem} />
+            <List items={items} onDelete={deleteItem} onSwap={swapItem} />
+          </Card>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>
