@@ -61,7 +61,6 @@
             draggable
             onDragStart={props.onDragStart}
             onDragEnd={props.onDragEnd}
-            onDrop={props.onDrop}
             onDragOver={handleDragOver}
             active={props.active}
             style={{
@@ -97,7 +96,6 @@
             onDragStart={() => setDragIndex(index)}
             onDragOver={() => setDragOverIndex(index)}
             onDragEnd={resetDragIndex}
-            onDrop={() => props.onSwap(dragIndex, dragOverIndex)}
             onDelete={() => props.onDelete(index)}
           />
         ));
@@ -150,22 +148,11 @@
           setItems(newItems);
         }
 
-        function swapItem(firstIndex, secondIndex) {
-          const newItems = items.map((item, index) =>
-            index === firstIndex
-              ? items[secondIndex]
-              : index === secondIndex
-              ? items[firstIndex]
-              : item
-          );
-          setItems(newItems);
-        }
-
         return (
           <Card>
             <Text>Todo List</Text>
             <Form onSubmit={addItem} />
-            <List items={items} onDelete={deleteItem} onSwap={swapItem} />
+            <List items={items} onDelete={deleteItem} />
           </Card>
         );
       }

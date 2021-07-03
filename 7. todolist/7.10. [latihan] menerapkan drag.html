@@ -22,7 +22,6 @@
         padding: 15px;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
         border-radius: 8px;
-        border: ${(props) => (props.active ? "solid 1px #6200ee" : "none")};
       `;
 
       const Button = styled.button`
@@ -51,18 +50,12 @@
       `;
 
       function ListItem(props) {
-        function handleDragOver(event) {
-          event.preventDefault();
-          props.onDragOver();
-        }
-
         return (
-          // 💻 tambahkan props onDragEnd={props.onDragEnd}
           <Card
-            draggable
-            onDragStart={props.onDragStart}
-            onDragOver={handleDragOver}
-            active={props.active}
+            // 💻 tambahkan props draggable agar <Card> bisa di drag
+
+            // 💻 tambahkan props onDragStart={props.onDragStart}
+
             style={{
               marginTop: 15,
               display: "flex",
@@ -79,23 +72,14 @@
       }
 
       function List(props) {
-        const [dragIndex, setDragIndex] = React.useState(null);
-        const [dragOverIndex, setDragOverIndex] = React.useState(null);
-
-        function resetDragIndex() {
-          // 💻 ubah dragIndex menjadi null menggunakan setDragIndex
-          // 💻 ubah dragOverIndex menjadi null menggunakan setDragOverIndex
-        }
+        // 💻 buatlah state [dragIndex, setDragIndex] menggunakan React.useState dengan default value null
 
         const isEmpty = props.items.length === 0;
         const listItems = props.items.map((item, index) => (
-          // 💻 tambahkan props onDragEnd={resetDragIndex}
+          // 💻 tambahkan props onDragStart={() => setDragIndex(index)}
           <ListItem
             key={item}
             item={item}
-            active={index === dragOverIndex}
-            onDragStart={() => setDragIndex(index)}
-            onDragOver={() => setDragOverIndex(index)}
             onDelete={() => props.onDelete(index)}
           />
         ));

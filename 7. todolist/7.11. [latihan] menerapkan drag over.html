@@ -55,17 +55,18 @@
 
       function ListItem(props) {
         function handleDragOver(event) {
-          event.preventDefault();
-          props.onDragOver();
+          // 💻 jalankan function event.preventDefault untuk mencegah default behaviour dari event onDragOver
+          // 💻 jalankan function props.onDragOver
         }
 
         return (
-          // 💻 tambahkan props active={props.active}
           <Card
             draggable
             onDragStart={props.onDragStart}
-            onDrop={props.onDrop}
-            onDragOver={handleDragOver}
+            // 💻 tambahkan props onDragOver={handleDragOver}
+
+            // 💻 tambahkan props active={props.active}
+
             style={{
               marginTop: 15,
               display: "flex",
@@ -83,17 +84,19 @@
 
       function List(props) {
         const [dragIndex, setDragIndex] = React.useState(null);
-        const [dragOverIndex, setDragOverIndex] = React.useState(null);
+
+        // 💻 buatlah state [dragOverIndex, setDragOverIndex] menggunakan React.useState dengan default value null
 
         const isEmpty = props.items.length === 0;
         const listItems = props.items.map((item, index) => (
-          // 💻 tambahkan props active={index === dragOverIndex}
           <ListItem
             key={item}
             item={item}
+            // 💻 tambahkan props active={index === dragOverIndex}
+
             onDragStart={() => setDragIndex(index)}
-            onDragOver={() => setDragOverIndex(index)}
-            onDrop={() => props.onSwap(dragIndex, dragOverIndex)}
+            // 💻 tambahkan props onDragOver={() => setDragOverIndex(index)}
+
             onDelete={() => props.onDelete(index)}
           />
         ));
@@ -146,22 +149,11 @@
           setItems(newItems);
         }
 
-        function swapItem(firstIndex, secondIndex) {
-          const newItems = items.map((item, index) =>
-            index === firstIndex
-              ? items[secondIndex]
-              : index === secondIndex
-              ? items[firstIndex]
-              : item
-          );
-          setItems(newItems);
-        }
-
         return (
           <Card>
             <Text>Todo List</Text>
             <Form onSubmit={addItem} />
-            <List items={items} onDelete={deleteItem} onSwap={swapItem} />
+            <List items={items} onDelete={deleteItem} />
           </Card>
         );
       }

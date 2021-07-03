@@ -22,6 +22,7 @@
         padding: 15px;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
         border-radius: 8px;
+        border: ${(props) => (props.active ? "solid 1px #6200ee" : "none")};
       `;
 
       const Button = styled.button`
@@ -51,20 +52,18 @@
 
       function ListItem(props) {
         function handleDragOver(event) {
-          // 💻 jalankan function event.preventDefault untuk mencegah default behaviour dari event onDragOver
-          // 💻 jalankan function props.onDragOver
+          event.preventDefault();
+          props.onDragOver();
         }
 
         return (
           <Card
-            // 💻 tambahkan props draggable agar <Card> bisa di drag
-
-            // 💻 tambahkan props onDragStart={props.onDragStart}
-
-            // 💻 tambahkan props onDrop={props.onDrop}
-
-            // 💻 tambahkan props onDragOver={handleDragOver}
-
+            draggable
+            onDragStart={props.onDragStart}
+            onDrop={props.onDrop}
+            onDragOver={handleDragOver}
+            onDragEnd={props.onDragEnd}
+            active={props.active}
             style={{
               marginTop: 15,
               display: "flex",
@@ -81,21 +80,24 @@
       }
 
       function List(props) {
-        // 💻 buatlah state [dragIndex, setDragIndex] menggunakan React.useState dengan default value null
+        const [dragIndex, setDragIndex] = React.useState(null);
+        const [dragOverIndex, setDragOverIndex] = React.useState(null);
 
-        // 💻 buatlah state [dragOverIndex, setDragOverIndex] menggunakan React.useState dengan default value null
+        function resetDragIndex() {
+          setDragIndex(null);
+          setDragOverIndex(null);
+        }
 
         const isEmpty = props.items.length === 0;
         const listItems = props.items.map((item, index) => (
           <ListItem
             key={item}
             item={item}
-            // 💻 tambahkan props onDragStart={() => setDragIndex(index)}
-
-            // 💻 tambahkan props onDragOver={() => setDragOverIndex(index)}
-
-            // 💻 tambahkan props onDrop={() => props.onSwap(dragIndex, dragOverIndex)}
-
+            active={index === dragOverIndex}
+            onDragStart={() => setDragIndex(index)}
+            onDragOver={() => setDragOverIndex(index)}
+            onDragEnd={resetDragIndex}
+            onDrop={() => props.onSwap(dragIndex, dragOverIndex)}
             onDelete={() => props.onDelete(index)}
           />
         ));
@@ -149,19 +151,21 @@
         }
 
         function swapItem(firstIndex, secondIndex) {
-          // 💻 tukar value dari firstIndex dan secondIndex menggunakan array.map, kemudian simpan ke variable newItems
-          // 📖 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
-          const newItems = [];
-
-          // 💻 ubah nilai dari items menjadi newItems menggunakan setItems
+          const newItems = items.map((item, index) =>
+            index === firstIndex
+              ? items[secondIndex]
+              : index === secondIndex
+              ? items[firstIndex]
+              : item
+          );
+          setItems(newItems);
         }
 
         return (
           <Card>
             <Text>Todo List</Text>
             <Form onSubmit={addItem} />
-            {/* 💻 tambahkan props onSwap={swapItem} */}
-            <List items={items} onDelete={deleteItem} />
+            <List items={items} onDelete={deleteItem} onSwap={swapItem} />
           </Card>
         );
       }

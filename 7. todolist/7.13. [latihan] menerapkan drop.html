@@ -57,11 +57,12 @@
         }
 
         return (
-          // 💻 tambahkan props onDragEnd={props.onDragEnd}
+          // 💻 tambahkan props onDrop={props.onDrop}
           <Card
             draggable
             onDragStart={props.onDragStart}
             onDragOver={handleDragOver}
+            onDragEnd={props.onDragEnd}
             active={props.active}
             style={{
               marginTop: 15,
@@ -83,19 +84,20 @@
         const [dragOverIndex, setDragOverIndex] = React.useState(null);
 
         function resetDragIndex() {
-          // 💻 ubah dragIndex menjadi null menggunakan setDragIndex
-          // 💻 ubah dragOverIndex menjadi null menggunakan setDragOverIndex
+          setDragIndex(null);
+          setDragOverIndex(null);
         }
 
         const isEmpty = props.items.length === 0;
         const listItems = props.items.map((item, index) => (
-          // 💻 tambahkan props onDragEnd={resetDragIndex}
+          // 💻 tambahkan props onDrop={() => props.onSwap(dragIndex, dragOverIndex)}
           <ListItem
             key={item}
             item={item}
             active={index === dragOverIndex}
             onDragStart={() => setDragIndex(index)}
             onDragOver={() => setDragOverIndex(index)}
+            onDragEnd={resetDragIndex}
             onDelete={() => props.onDelete(index)}
           />
         ));
@@ -148,10 +150,19 @@
           setItems(newItems);
         }
 
+        function swapItem(firstIndex, secondIndex) {
+          // 💻 tukar value dari firstIndex dan secondIndex menggunakan array.map, kemudian simpan ke variable newItems
+          // 📖 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+          const newItems = [];
+
+          // 💻 ubah nilai dari items menjadi newItems menggunakan setItems
+        }
+
         return (
           <Card>
             <Text>Todo List</Text>
             <Form onSubmit={addItem} />
+            {/* 💻 tambahkan props onSwap={swapItem} */}
             <List items={items} onDelete={deleteItem} />
           </Card>
         );

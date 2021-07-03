@@ -22,6 +22,7 @@
         padding: 15px;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
         border-radius: 8px;
+        border: ${(props) => (props.active ? "solid 1px #6200ee" : "none")};
       `;
 
       const Button = styled.button`
@@ -59,8 +60,8 @@
           <Card
             draggable
             onDragStart={props.onDragStart}
-            onDrop={props.onDrop}
             onDragOver={handleDragOver}
+            active={props.active}
             style={{
               marginTop: 15,
               display: "flex",
@@ -85,9 +86,9 @@
           <ListItem
             key={item}
             item={item}
+            active={index === dragOverIndex}
             onDragStart={() => setDragIndex(index)}
             onDragOver={() => setDragOverIndex(index)}
-            onDrop={() => props.onSwap(dragIndex, dragOverIndex)}
             onDelete={() => props.onDelete(index)}
           />
         ));
@@ -140,22 +141,11 @@
           setItems(newItems);
         }
 
-        function swapItem(firstIndex, secondIndex) {
-          const newItems = items.map((item, index) =>
-            index === firstIndex
-              ? items[secondIndex]
-              : index === secondIndex
-              ? items[firstIndex]
-              : item
-          );
-          setItems(newItems);
-        }
-
         return (
           <Card>
             <Text>Todo List</Text>
             <Form onSubmit={addItem} />
-            <List items={items} onDelete={deleteItem} onSwap={swapItem} />
+            <List items={items} onDelete={deleteItem} />
           </Card>
         );
       }
