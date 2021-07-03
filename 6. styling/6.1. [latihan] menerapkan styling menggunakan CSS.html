@@ -76,21 +76,21 @@
         }
 
         return (
-          // 💻 terapkan class .card pada div menggunakan props className
+          // 💻 terapkan class card pada <div> menggunakan props className
           // 📖 https://reactjs.org/docs/faq-styling.html#how-do-i-add-css-classes-to-components
           <div>
-            {/* 💻 terapkan class .title pada h1 menggunakan props className */}
+            {/* 💻 terapkan class title pada <h1> menggunakan props className */}
             <h1>{props.title}</h1>
-            {/* 💻 terapkan class .input pada input menggunakan props className */}
+            {/* 💻 terapkan class input pada <input> menggunakan props className */}
             <input
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
               value={inputValue}
             />
-            {/* 💻 terapkan class .button pada button menggunakan props className */}
+            {/* 💻 terapkan class button pada <button> menggunakan props className */}
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
 
-            {/* 💻 terapkan class .text pada p menggunakan props className */}
+            {/* 💻 terapkan class text pada <p> menggunakan props className */}
             {inputValue !== "" ? <p>Hi {inputValue}</p> : null}
           </div>
         );

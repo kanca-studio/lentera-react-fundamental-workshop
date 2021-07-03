@@ -11,18 +11,18 @@
       function Greeting(props) {
         // 💻 buatlah sebuah variable bernama inputValue dengan value ""
 
-        // 💻 buatlah sebuah function dengan nama handleInputChange yang menerima sebuah parameter bernama event
-        // 💻 di dalam function handleInputChange, ubah value dari variable inputValue menjadi event.target.value
+        // 💻 buatlah sebuah function dengan nama handleInputChange() yang menerima sebuah parameter bernama event
+        // 💻 di dalam handleInputChange(), ubah value dari variable inputValue menjadi event.target.value
 
         function handleButtonClick() {
-          // 💻 tampilkan variable inputValue pada alert di bawah
+          // 💻 tampilkan variable inputValue pada alert() di bawah
           alert("Hi everyone");
         }
 
         return (
           <div>
             <h1>{props.title}</h1>
-            {/* 💻 tambahkan props onChange={handleInputChange} pada input */}
+            {/* 💻 tambahkan props onChange={handleInputChange} */}
             <input placeholder={props.inputPlaceholder} />
             <button onClick={handleButtonClick}>{props.buttonLabel}</button>
           </div>

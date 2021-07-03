@@ -81,14 +81,14 @@
         }
 
         return (
-          // 💻 hapus props className dan terapkan inline styling pada div menggunakan props style
+          // 💻 hapus props className dan terapkan inline styling pada <div> menggunakan props style
           // 📖 https://reactjs.org/docs/dom-elements.html#style
           // 📋 style={{ padding: "25px", boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.2)", borderRadius: "8px", backgroundColor: "#ffffff" }}
           <div className="card">
-            {/* 💻 hapus props className dan terapkan inline styling pada h1 menggunakan props style */}
+            {/* 💻 hapus props className dan terapkan inline styling pada <h1> menggunakan props style */}
             <h1 className="title">{props.title}</h1>
 
-            {/* 💻 hapus props className dan terapkan inline styling pada input menggunakan props style */}
+            {/* 💻 hapus props className dan terapkan inline styling pada <input> menggunakan props style */}
             <input
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
@@ -96,12 +96,12 @@
               className="input"
             />
 
-            {/* 💻 hapus props className dan terapkan inline styling pada button menggunakan props style */}
+            {/* 💻 hapus props className dan terapkan inline styling pada <button> menggunakan props style */}
             <button className="button" onClick={handleButtonClick}>
               {props.buttonLabel}
             </button>
 
-            {/* 💻 hapus props className dan terapkan inline styling pada p menggunakan props style */}
+            {/* 💻 hapus props className dan terapkan inline styling pada <p> menggunakan props style */}
             {inputValue !== "" ? <p className="text">Hi {inputValue}</p> : null}
           </div>
         );
