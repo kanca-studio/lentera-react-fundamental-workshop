@@ -60,9 +60,9 @@
           <Card
             draggable
             onDragStart={props.onDragStart}
-            onDrop={props.onDrop}
             onDragOver={handleDragOver}
             onDragEnd={props.onDragEnd}
+            onDrop={props.onDrop}
             active={props.active}
             style={{
               marginTop: 15,
@@ -94,11 +94,11 @@
             key={item}
             item={item}
             active={index === dragOverIndex}
+            onDelete={() => props.onDelete(index)}
             onDragStart={() => setDragIndex(index)}
             onDragOver={() => setDragOverIndex(index)}
             onDragEnd={resetDragIndex}
             onDrop={() => props.onSwap(dragIndex, dragOverIndex)}
-            onDelete={() => props.onDelete(index)}
           />
         ));
         return (

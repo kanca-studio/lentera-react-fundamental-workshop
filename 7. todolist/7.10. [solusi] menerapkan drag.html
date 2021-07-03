@@ -77,8 +77,8 @@
           <ListItem
             key={item}
             item={item}
-            onDragStart={() => setDragIndex(index)}
             onDelete={() => props.onDelete(index)}
+            onDragStart={() => setDragIndex(index)}
           />
         ));
         return (
