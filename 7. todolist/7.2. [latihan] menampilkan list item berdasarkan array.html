@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>Todolist</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      function ListItem(props) {
+        return (
+          <div>
+            <p>{props.item}</p>
+            <button>Delete</button>
+          </div>
+        );
+      }
+
+      function List(props) {
+        // 💻 ubah props.items yang semula adalah array of string menjadi array of element
+        /* 📖 untuk melakukan hal tersebut, anda dapat menggunakan array.map(), berikut contoh penerapannya :
+         * https://reactjs.org/docs/lists-and-keys.html
+         */
+        // 📋 const listItems = props.items.map((item) => <ListItem key={item} item={item} />)
+        const listItems = null;
+
+        return (
+          <div>
+            {/* 💻 hapus ketiga <ListItem> berikut */}
+            <ListItem item="Eat" />
+            <ListItem item="Sleep" />
+            <ListItem item="Code" />
+
+            {/* 💻 embed variable listItems */}
+          </div>
+        );
+      }
+
+      function Form() {
+        return (
+          <div>
+            <input type="text" />
+            <button>Add</button>
+          </div>
+        );
+      }
+
+      function App() {
+        // 💻 buatlah array of string dengan nama items dan isilah dengan ["Eat", "Sleep", "Code"]
+
+        return (
+          <div>
+            <p>Todo List</p>
+            <Form />
+            {/* 💻 tambahkan props items={items} */}
+            <List />
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

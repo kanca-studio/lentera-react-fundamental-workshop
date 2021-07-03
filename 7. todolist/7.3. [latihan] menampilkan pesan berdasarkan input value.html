@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <title>Todolist</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      function ListItem(props) {
+        return (
+          <div>
+            <p>{props.item}</p>
+            <button>Delete</button>
+          </div>
+        );
+      }
+
+      function List(props) {
+        const listItems = props.items.map((item) => (
+          <ListItem key={item} item={item} />
+        ));
+        return <div>{listItems}</div>;
+      }
+
+      function Form(props) {
+        // 💻 buatlah state [inputValue, setInputValue] menggunakan React.useState dengan default value ""
+
+        function handleChange(event) {
+          // 💻 ubah nilai dari inputValue menjadi event.target.value menggunakan setInputValue()
+        }
+
+        function handleSubmit() {
+          // 💻 submit inputValue ke <App> dengan menjalankan props.onSubmit(), jangan lupa masukkan inputValue sebagai parameter
+          // 💻 ubah nilai dari inputValue menjadi "" menggunakan setInputValue()
+        }
+
+        return (
+          <div>
+            {/* 💻 tambahkan props value={inputValue} dan onChange={handleChange} */}
+            <input type="text" />
+
+            {/* 💻 tambahkan props onClick={handleSubmit} */}
+            <button>Add</button>
+          </div>
+        );
+      }
+
+      function App() {
+        const items = ["Eat", "Sleep", "Code"];
+
+        function addItem(newItem) {
+          // 💻 tampilkan nilai dari newItem menggunakan alert()
+        }
+
+        return (
+          <div>
+            <p>Todo List</p>
+            {/* 💻 tambahkan props onSubmit={addItem} */}
+            <Form />
+            <List items={items} />
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

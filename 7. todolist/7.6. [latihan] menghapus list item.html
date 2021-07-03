@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <title>Todolist</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      function ListItem(props) {
+        return (
+          <div>
+            <p>{props.item}</p>
+            {/* 💻 tambahkan props onClick={props.onDelete} */}
+            <button>Delete</button>
+          </div>
+        );
+      }
+
+      function List(props) {
+        const listItems = props.items.map((item, index) => (
+          // 💻 tambahkan props onDelete={() => props.onDelete(index)}
+          <ListItem key={item} item={item} />
+        ));
+        return <div>{listItems}</div>;
+      }
+
+      function Form(props) {
+        const [inputValue, setInputValue] = React.useState("");
+
+        function handleChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleSubmit() {
+          props.onSubmit(inputValue);
+          setInputValue("");
+        }
+
+        const isEmpty = inputValue === "";
+
+        return (
+          <div>
+            <input type="text" value={inputValue} onChange={handleChange} />
+            <button disabled={isEmpty} onClick={handleSubmit}>
+              Add
+            </button>
+          </div>
+        );
+      }
+
+      function App() {
+        const [items, setItems] = React.useState(["Eat", "Sleep", "Code"]);
+
+        function addItem(newItem) {
+          const newItems = items.concat(newItem);
+          setItems(newItems);
+        }
+
+        function deleteItem(targetIndex) {
+          // 💻 hapus element pada array items sesuai targetIndex menggunakan array.filter(), kemudian simpan ke variable newItems
+          // 📖 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+          const newItems = [];
+
+          // 💻 ubah nilai dari items menjadi newItems menggunakan setItems()
+        }
+
+        return (
+          <div>
+            <p>Todo List</p>
+            <Form onSubmit={addItem} />
+            {/* 💻 tambahkan props onDelete={deleteItem} */}
+            <List items={items} />
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

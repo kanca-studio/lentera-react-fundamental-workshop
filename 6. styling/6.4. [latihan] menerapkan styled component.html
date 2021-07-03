@@ -22,7 +22,7 @@
     <!-- <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script> -->
 
     <script type="text/babel">
-      // 💻 buatlah component Card menggunakan styled component yang akan menerapkan styling dari div
+      // 💻 buatlah component <Card> menggunakan styled component yang akan menerapkan styling dari <div>
       /*
        * 📖 Silahkan kunjungi link berikut untuk mempelajari bagaimana cara melakukan styling menggunakan styled component
        * https://styled-components.com/docs/basics#getting-started
@@ -33,16 +33,16 @@
        */
       const Card = null;
 
-      // 💻 buatlah component Title menggunakan styled component yang akan menerapkan styling dari h1
+      // 💻 buatlah component <Title> menggunakan styled component yang akan menerapkan styling dari <h1>
       const Title = null;
 
-      // 💻 buatlah component Input menggunakan styled component yang akan menerapkan styling dari input
+      // 💻 buatlah component <Input> menggunakan styled component yang akan menerapkan styling dari <input>
       const Input = null;
 
-      // 💻 buatlah component Button menggunakan styled component yang akan menerapkan styling dari button
+      // 💻 buatlah component <Button> menggunakan styled component yang akan menerapkan styling dari <button>
       const Button = null;
 
-      // 💻 buatlah component Text menggunakan styled component yang akan menerapkan styling dari p
+      // 💻 buatlah component <Text> menggunakan styled component yang akan menerapkan styling dari <p>
       const Text = null;
 
       function Greeting(props) {
@@ -64,7 +64,7 @@
         }
 
         return (
-          // 💻 gunakan component Card untuk menggantikan div, jangan lupa berikan props colorMode={props.colorMode}
+          // 💻 gunakan component <Card> untuk menggantikan <div>, jangan lupa berikan props colorMode={props.colorMode}
           <div
             style={{
               padding: "25px",
@@ -74,7 +74,7 @@
                 props.colorMode === "dark" ? "#000000" : "#ffffff",
             }}
           >
-            {/* 💻 gunakan component Title untuk menggantikan h1, jangan lupa berikan props colorMode={props.colorMode} */}
+            {/* 💻 gunakan component <Title> untuk menggantikan <h1>, jangan lupa berikan props colorMode={props.colorMode} */}
             <h1
               style={{
                 fontFamily: "Arial, Helvetica, sans-serif",
@@ -84,7 +84,7 @@
             >
               {props.title}
             </h1>
-            {/* 💻 gunakan component Input untuk menggantikan input, jangan lupa berikan props colorMode={props.colorMode} */}
+            {/* 💻 gunakan component <Input> untuk menggantikan <input>, jangan lupa berikan props colorMode={props.colorMode} */}
             <input
               placeholder={props.inputPlaceholder}
               onChange={handleInputChange}
@@ -101,7 +101,7 @@
                 backgroundColor: "transparent",
               }}
             />
-            {/* 💻 gunakan component Button untuk menggantikan button */}
+            {/* 💻 gunakan component <Button> untuk menggantikan <button> */}
             <button
               onClick={handleButtonClick}
               style={{
@@ -120,7 +120,7 @@
             </button>
 
             {inputValue !== "" ? (
-              // 💻 gunakan component Text untuk menggantikan p
+              // 💻 gunakan component <Text> untuk menggantikan <p>
               <p
                 style={{
                   fontFamily: "Arial, Helvetica, sans-serif",

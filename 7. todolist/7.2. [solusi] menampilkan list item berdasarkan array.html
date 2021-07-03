@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Todolist</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      function ListItem(props) {
+        return (
+          <div>
+            <p>{props.item}</p>
+            <button>Delete</button>
+          </div>
+        );
+      }
+
+      function List(props) {
+        const listItems = props.items.map((item) => (
+          <ListItem key={item} item={item} />
+        ));
+        return <div>{listItems}</div>;
+      }
+
+      function Form() {
+        return (
+          <div>
+            <input type="text" />
+            <button>Add</button>
+          </div>
+        );
+      }
+
+      function App() {
+        const items = ["Eat", "Sleep", "Code"];
+        return (
+          <div>
+            <p>Todo List</p>
+            <Form />
+            <List items={items} />
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

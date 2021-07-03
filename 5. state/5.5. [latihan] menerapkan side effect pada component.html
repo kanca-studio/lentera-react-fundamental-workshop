@@ -17,12 +17,11 @@
         const [inputValue, setInputValue] = React.useState("");
 
         React.useEffect(() => {
-          // 💻 simpan inputValue ke localstorage.setItem
+          // 💻 simpan inputValue ke localstorage menggunakan localstorage.setItem()
           /* 📖 https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
            * Pada referensi diatas, kita bisa mengetahui cara untuk menyimpan value ke localstorage pada bagian "Example"
            */
-          
-          // 💻 tambahkan state inputValue sebagai dependency, agar side effect ini dipanggil setiap kali state inputValue berubah
+          // 💻 tambahkan inputValue sebagai dependency, agar side effect ini dipanggil setiap kali inputValue berubah
           // 📖 https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect
         }, []);
 

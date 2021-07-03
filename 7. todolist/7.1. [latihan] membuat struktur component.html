@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <title>Todolist</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      function ListItem(props) {
+        return (
+          <div>
+            {/* 💻 tampilkan <p> dengan children props.item */}
+
+            {/* 💻 tampilkan <button> dengan children "Delete" */}
+          </div>
+        );
+      }
+
+      function List() {
+        return (
+          <div>
+            {/* 💻 tampilkan <ListItem> dengan props item="Eat" */}
+
+            {/* 💻 tampilkan <ListItem> dengan props item="Sleep" */}
+
+            {/* 💻 tampilkan <ListItem> dengan props item="Code" */}
+          </div>
+        );
+      }
+
+      function Form() {
+        return (
+          <div>
+            {/* 💻 tampilkan <input> dengan props type="text" */}
+
+            {/* 💻 tampilkan <button> dengan children "Add" */}
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <div>
+            {/* 💻 tampilkan <p> dengan children "Todo List"  */}
+
+            {/* 💻 tampilkan <Form> */}
+
+            {/* 💻 tampilkan <List> */}
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>

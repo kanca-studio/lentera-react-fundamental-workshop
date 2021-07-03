@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title>Todolist</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+      function ListItem(props) {
+        return (
+          <div>
+            <p>{props.item}</p>
+            <button>Delete</button>
+          </div>
+        );
+      }
+
+      function List(props) {
+        const listItems = props.items.map((item) => (
+          <ListItem key={item} item={item} />
+        ));
+        return <div>{listItems}</div>;
+      }
+
+      function Form(props) {
+        const [inputValue, setInputValue] = React.useState("");
+
+        function handleChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleSubmit() {
+          props.onSubmit(inputValue);
+          setInputValue("");
+        }
+
+        /* 💻 periksa nilai dari inputValue. Apabila inputValue kosong, maka isEmpty harus bernilai true.
+         * Apabila inputValue tidak kosong, maka isEmpty harus bernilai false
+         */
+        const isEmpty = false;
+
+        return (
+          <div>
+            <input type="text" value={inputValue} onChange={handleChange} />
+            {/* 💻 tambahkan props disabled={isEmpty} */}
+            <button onClick={handleSubmit}>Add</button>
+          </div>
+        );
+      }
+
+      function App() {
+        const items = ["Eat", "Sleep", "Code"];
+
+        function addItem(newItem) {
+          alert(newItem);
+        }
+
+        return (
+          <div>
+            <p>Todo List</p>
+            <Form onSubmit={addItem} />
+            <List items={items} />
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>
