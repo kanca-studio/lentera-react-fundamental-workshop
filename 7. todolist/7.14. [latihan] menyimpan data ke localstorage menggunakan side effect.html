@@ -138,12 +138,15 @@
       }
 
       function App() {
-        // 💻 ubah default value dari state items menjadi JSON.parse(localStorage.getItem("items")) ?? []
+        /* 💻 ubah default value dari state inputValue di bawah menggunakan value dari localstorage.
+         * Apabila value di localstorage sudah ada, maka gunakan localstorage sebagai default value.
+         * Apabila value di localstorage belum ada, maka gunakan array kosong [] sebagai default value
+         */
         const [items, setItems] = React.useState(["Eat", "Sleep", "Code"]);
 
         React.useEffect(() => {
-          /* 💻 simpan array items ke localStorage menggunakan localStorage.setItem
-           * jangan lupa untuk mengubah array items menjadi string terlebih dahulu menggunakan JSON.stringify
+          /* 💻 simpan array items ke localStorage menggunakan localStorage.setItem()
+           * jangan lupa untuk mengubah array items menjadi string terlebih dahulu menggunakan JSON.stringify()
            */
           // 📖 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
           // 💻 tambahkan items sebagai dependency

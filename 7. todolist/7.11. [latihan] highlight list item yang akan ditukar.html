@@ -55,8 +55,8 @@
 
       function ListItem(props) {
         function handleDragOver(event) {
-          // 💻 jalankan function event.preventDefault untuk mencegah default behaviour dari event onDragOver
-          // 💻 jalankan function props.onDragOver
+          // 💻 jalankan event.preventDefault() untuk mencegah default behaviour dari event onDragOver berjalan
+          // 💻 jalankan props.onDragOver()
         }
 
         return (
@@ -92,7 +92,10 @@
           <ListItem
             key={item}
             item={item}
-            // 💻 tambahkan props active={index === dragOverIndex}
+            /* 💻 tambahkan props active.
+             * Apabila nilai dari index sama dengan dragOverIndex, maka props active harus bernilai true.
+             * Apabila nilai dari index tidak sama dengan dragOverIndex, maka props active harus bernilai false.
+             */
 
             onDelete={() => props.onDelete(index)}
             onDragStart={() => setDragIndex(index)}
