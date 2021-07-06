@@ -7,30 +7,30 @@
     <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <!-- matikan comment di bawah untuk menggunakan uuidv4() -->
+    <!-- <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script> -->
     <script type="text/babel">
       function ListItem(props) {
         return (
           <div>
-            <p>{props.item}</p>
+            <p>{props.title}</p>
             <button>Delete</button>
           </div>
         );
       }
 
       function List(props) {
-        // 💻 ubah props.items yang semula adalah array of string menjadi array of element
-        /* 📖 untuk melakukan hal tersebut, anda dapat menggunakan array.map(), berikut contoh penerapannya :
-         * https://reactjs.org/docs/lists-and-keys.html
+        /* 💻 ubah props.items yang semula adalah array of object menjadi array of <ListItem>
+         * pada <ListItem> yang dimapping, gunakan item.id sebagai props key dan item.title sebagai props title
          */
-        // 📋 const listItems = props.items.map((item) => <ListItem key={item} item={item} />)
         const listItems = null;
 
         return (
           <div>
             {/* 💻 hapus ketiga <ListItem> berikut */}
-            <ListItem item="Eat" />
-            <ListItem item="Sleep" />
-            <ListItem item="Code" />
+            <ListItem title="Eat" />
+            <ListItem title="Sleep" />
+            <ListItem title="Code" />
 
             {/* 💻 embed variable listItems */}
           </div>
@@ -47,7 +47,10 @@
       }
 
       function App() {
-        // 💻 buatlah array of string dengan nama items dan isilah dengan ["Eat", "Sleep", "Code"]
+        /* 💻 buatlah array of object dengan nama items dan property sebagai berikut :
+         * title  : nama dari aktivitas yang akan dilakukan, contohnya : "Code"
+         * id     : id dari item (gunakan uuidv4() untuk membuat id secara random dan unique)
+         */
 
         return (
           <div>

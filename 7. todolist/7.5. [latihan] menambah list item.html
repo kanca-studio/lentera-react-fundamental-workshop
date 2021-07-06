@@ -7,11 +7,12 @@
     <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
     <script type="text/babel">
       function ListItem(props) {
         return (
           <div>
-            <p>{props.item}</p>
+            <p>{props.title}</p>
             <button>Delete</button>
           </div>
         );
@@ -19,7 +20,7 @@
 
       function List(props) {
         const listItems = props.items.map((item) => (
-          <ListItem key={item} item={item} />
+          <ListItem key={item.id} item={item.title} />
         ));
         return <div>{listItems}</div>;
       }
@@ -49,10 +50,29 @@
       }
 
       function App() {
-        // 💻 ubahlah array items berikut menjadi state [items, setItems] menggunakan React.useState dengan default value ["Eat", "Sleep", "Code"]
-        const items = ["Eat", "Sleep", "Code"];
+        // 💻 ubahlah array items berikut menjadi state [items, setItems] menggunakan React.useState
+        const items = [
+          {
+            title: "Eat",
+            id: uuidv4(),
+          },
+          {
+            title: "Sleep",
+            id: uuidv4(),
+          },
+          {
+            title: "Code",
+            id: uuidv4(),
+          },
+        ];
 
-        function addItem(newItem) {
+        function addItem(title) {
+          /* 💻 buatlah object baru dengan property sebagai berikut :
+           * title : berisi variable title
+           * id : berisi nilai dari uuidv4()
+           */
+          const newItem = null;
+
           // 💻 tambahkan newItem ke array items menggunakan array.concat(), kemudian simpan ke variable newItems
           // 📖 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
           const newItems = [];

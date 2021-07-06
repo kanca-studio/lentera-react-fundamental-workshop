@@ -7,11 +7,12 @@
     <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
     <script type="text/babel">
       function ListItem(props) {
         return (
           <div>
-            <p>{props.item}</p>
+            <p>{props.title}</p>
             <button>Delete</button>
           </div>
         );
@@ -19,7 +20,7 @@
 
       function List(props) {
         const listItems = props.items.map((item) => (
-          <ListItem key={item} item={item} />
+          <ListItem key={item.id} title={item.title} />
         ));
         return <div>{listItems}</div>;
       }
@@ -34,7 +35,20 @@
       }
 
       function App() {
-        const items = ["Eat", "Sleep", "Code"];
+        const items = [
+          {
+            title: "Eat",
+            id: uuidv4(),
+          },
+          {
+            title: "Sleep",
+            id: uuidv4(),
+          },
+          {
+            title: "Code",
+            id: uuidv4(),
+          },
+        ];
         return (
           <div>
             <p>Todo List</p>
