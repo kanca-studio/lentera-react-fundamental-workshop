@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>React Fundamental</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script>
+      const greeting = React.createElement("div", {
+        children: [
+          React.createElement("h1", {
+            children: "Welcome",
+            key: "greeting-title",
+          }),
+          React.createElement("input", {
+            type: "text",
+            placeholder: "enter your name",
+            key: "greeting-input",
+          }),
+          React.createElement("button", {
+            children: "Say hi",
+            key: "greeting-button",
+          }),
+        ],
+      });
+
+      const root = document.getElementById("root");
+      ReactDOM.render(greeting, root);
+    </script>
+  </body>
+</html>

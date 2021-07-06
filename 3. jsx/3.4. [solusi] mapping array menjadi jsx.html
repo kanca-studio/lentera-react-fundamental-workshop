@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>React Fundamental</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    <script type="text/babel">
+      const students = [
+        { name: "Budi", id: uuidv4() },
+        { name: "Tono", id: uuidv4() },
+        { name: "Asep", id: uuidv4() },
+        { name: "Asep", id: uuidv4() },
+      ];
+
+      const studentListItems = students.map((student) => (
+        <li key={student.id}>{student.name}</li>
+      ));
+
+      const studentList = <ol>{studentListItems}</ol>;
+
+      const root = document.getElementById("root");
+      ReactDOM.render(studentList, root);
+    </script>
+  </body>
+</html>
