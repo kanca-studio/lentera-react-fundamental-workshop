@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>Todolist</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    <script type="text/babel">
+      function Form(props) {
+        const [inputValue, setInputValue] = React.useState("");
+
+        function handleChange(event) {
+          setInputValue(event.target.value);
+        }
+
+        function handleSubmit() {
+          props.onSubmit(inputValue);
+          setInputValue("");
+        }
+
+        return (
+          <div>
+            <input type="text" value={inputValue} onChange={handleChange} />
+            <button onClick={handleSubmit}>Add</button>
+          </div>
+        );
+      }
+
+      function App() {
+        const [students, setStudents] = React.useState([
+          {
+            name: "Budi",
+            id: uuidv4(),
+          },
+          {
+            name: "Tono",
+            id: uuidv4(),
+          },
+          {
+            name: "Asep",
+            id: uuidv4(),
+          },
+        ]);
+
+        React.useEffect(() => {
+          document.title = `There are ${students.length} students`;
+        }, [students]);
+
+        function addStudent(name) {
+          // 💻 ubah implementasi array.push() di bawah menggunakan array.concat()
+          // 📖 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat?retiredLocale=id
+          students.push({ name, id: uuidv4() });
+          setStudents(students);
+        }
+
+        const listItems = students.map((student) => (
+          <li key={student.id}>{student.name}</li>
+        ));
+
+        return (
+          <div>
+            <Form onSubmit={addStudent} />
+            <ol>{listItems}</ol>
+          </div>
+        );
+      }
+
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>
