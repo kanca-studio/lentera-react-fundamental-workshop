@@ -97,7 +97,9 @@
              * Apabila nilai dari item.id sama dengan dragOverItem.id, maka props active harus bernilai true.
              * Apabila nilai dari item.id tidak sama dengan dragOverItem.id, maka props active harus bernilai false.
              */
-
+            /* 📋 jangan lupa untuk menggunakan optional chaining (?) untuk menghindari error saat mengakses dragOverItem.id karena dragOverItem bisa saja bernilai null
+             * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+             */
             onDelete={() => props.onDelete(item.id)}
             onDragStart={() => setDragItem(item)}
             // 💻 tambahkan props onDragOver={() => setDragOverItem(item)}
