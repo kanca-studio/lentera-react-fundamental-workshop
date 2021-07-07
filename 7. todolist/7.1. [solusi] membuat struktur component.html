@@ -11,7 +11,7 @@
       function ListItem(props) {
         return (
           <div>
-            <p>{props.item}</p>
+            <p>{props.title}</p>
             <button>Delete</button>
           </div>
         );
@@ -20,9 +20,9 @@
       function List() {
         return (
           <div>
-            <ListItem item="Eat" />
-            <ListItem item="Sleep" />
-            <ListItem item="Code" />
+            <ListItem title="Eat" />
+            <ListItem title="Sleep" />
+            <ListItem title="Code" />
           </div>
         );
       }
