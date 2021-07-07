@@ -15,6 +15,7 @@
     <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
     <script src="https://unpkg.com/react-is@17.0.2/umd/react-is.production.min.js"></script>
     <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script>
     <script type="text/babel">
@@ -61,7 +62,7 @@
               alignItems: "center",
             }}
           >
-            <Text>{props.item}</Text>
+            <Text>{props.title}</Text>
             <Button variant="danger" onClick={props.onDelete}>
               Delete
             </Button>
@@ -70,15 +71,15 @@
       }
 
       function List(props) {
-        const [dragIndex, setDragIndex] = React.useState(null);
+        const [dragItem, setDragItem] = React.useState(null);
 
         const isEmpty = props.items.length === 0;
-        const listItems = props.items.map((item, index) => (
+        const listItems = props.items.map((item) => (
           <ListItem
-            key={item}
-            item={item}
-            onDelete={() => props.onDelete(index)}
-            onDragStart={() => setDragIndex(index)}
+            key={item.id}
+            title={item.title}
+            onDelete={() => props.onDelete(item.id)}
+            onDragStart={() => setDragItem(item)}
           />
         ));
         return (
@@ -118,15 +119,29 @@
       }
 
       function App() {
-        const [items, setItems] = React.useState(["Eat", "Sleep", "Code"]);
+        const [items, setItems] = React.useState([
+          {
+            title: "Eat",
+            id: uuidv4(),
+          },
+          {
+            title: "Sleep",
+            id: uuidv4(),
+          },
+          {
+            title: "Code",
+            id: uuidv4(),
+          },
+        ]);
 
-        function addItem(newItem) {
+        function addItem(title) {
+          const newItem = { title, id: uuidv4() };
           const newItems = items.concat(newItem);
           setItems(newItems);
         }
 
-        function deleteItem(targetIndex) {
-          const newItems = items.filter((item, index) => index !== targetIndex);
+        function deleteItem(targetId) {
+          const newItems = items.filter((item) => item.id !== targetId);
           setItems(newItems);
         }
 

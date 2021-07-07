@@ -20,7 +20,7 @@
 
       function List(props) {
         const listItems = props.items.map((item) => (
-          <ListItem key={item.id} item={item.title} />
+          <ListItem key={item.id} title={item.title} />
         ));
         return <div>{listItems}</div>;
       }
