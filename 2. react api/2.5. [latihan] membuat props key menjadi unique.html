@@ -4,8 +4,8 @@
   </head>
   <body>
     <div id="root"></div>
-    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <!-- 💻 matikan comment di bawah ini untuk menggunakan uuidv4() -->
     <!-- <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script> -->
     <script>
@@ -13,7 +13,7 @@
        * 1. name  : nama dari siswa
        * 2. id    : id dari siswa (gunakan uuidv4() untuk membuat id secara random dan unique)
        */
-      const students = ["Budi", "Tono", "Asep", "Tono"];
+      const students = ["Budi", "Tono", "Asep", "Asep"];
 
       const studentListItems = students.map((student) =>
         // 💻 karena sekarang student adalah object, maka gunakan student.name sebagai children, dan student.id sebagai key
