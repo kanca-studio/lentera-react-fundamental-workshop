@@ -125,7 +125,12 @@
         /* 💻 ubah default value dari state inputValue di bawah menggunakan value dari localstorage.
          * Apabila value di localstorage sudah ada, maka gunakan localstorage sebagai default value.
          * Apabila value di localstorage belum ada, maka gunakan array kosong [] sebagai default value
+         *
+         * Catatan :
+         * Jangan lupa untuk membungkus value dari local storage dengan JSON.parse(),
+         * agar value dari localstorage yang tadinya berupa string dapat diubah menjadi array lagi
          */
+        // 📖 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
         const [items, setItems] = React.useState([
           {
             title: "Eat",
